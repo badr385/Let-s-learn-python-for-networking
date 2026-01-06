@@ -1,107 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/presentation/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/final/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/examples/examples-progression/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/presentation/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-01-print-output/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/examples/real-life-network-automation-examples/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-02-variables-types/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/guides/best-practices-io-credentials/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-03-operators-logic/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-01-print-output/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-04-conditions/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-02-variables-types/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-05-loops/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-03-operators-logic/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-06-lists-dicts/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-04-conditions/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-07-debugging/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-05-loops/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-08-functions/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-06-lists-dicts/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-09-first-functions/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-07-debugging/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-10-output-control/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-08-functions/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-11-functions-collections/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-09-first-functions/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-12-network-data/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-10-output-control/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-12-python-for-networking-libraries/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-11-functions-collections/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-13-inventory-io-csv-excel/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-12-network-data/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-13-network-usecases/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-12-python-for-networking-libraries/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-14-connect-and-get-info/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-13-inventory-io-csv-excel/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-14-network-functions/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-13-network-usecases/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-15-concurrency-multi-device/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-14-connect-and-get-info/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-15-parsing/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-14-network-functions/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-16-mini-automation/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-15-concurrency-multi-device/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-16-push-config-safely/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-15-parsing/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-17-mindset/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-16-mini-automation/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-18-next-steps/</loc>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-16-push-config-safely/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-17-mindset/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://badr385.github.io/Let-s-learn-python-for-networking/lessons/lesson-18-next-steps/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
 </urlset>
