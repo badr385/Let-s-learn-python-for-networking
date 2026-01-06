@@ -1,0 +1,67 @@
+site_name: Python From Zero → Network Automation
+site_description: Learn Python step-by-step (fun), then automate networks.
+site_url: https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - toc.follow
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    - scheme: slate
+      primary: green
+      accent: blue
+
+nav:
+  - Home: index.md
+  - Presentation: presentation.md
+  
+  - 🟦 Part 1 — Python Basics:
+      - Lesson 1 — Print & Output: lessons/lesson-01-print-output.md
+      - Lesson 2 — Variables & Types: lessons/lesson-02-variables-types.md
+      - Lesson 3 — Operators & Logic: lessons/lesson-03-operators-logic.md
+      - Lesson 4 — Conditions (if / elif / else): lessons/lesson-04-conditions.md
+      - Lesson 5 — Loops (for / while): lessons/lesson-05-loops.md
+      - Lesson 6 — Lists & Dictionaries: lessons/lesson-06-lists-dicts.md
+      - Lesson 7 — Errors & Debugging: lessons/lesson-07-debugging.md
+
+  - 🟩 Part 2 — Python Functions:
+      - Lesson 8 — What Is a Function: lessons/lesson-08-functions.md
+      - Lesson 9 — Writing Your First Functions: lessons/lesson-09-first-functions.md
+      - Lesson 10 — Functions & Output Control: lessons/lesson-10-output-control.md
+      - Lesson 11 — Functions with Lists & Dictionaries: lessons/lesson-11-functions-collections.md
+
+  - 🟨 Part 3 — Python for Networking:
+      - Lesson 12 — Libraries & the Big Picture: lessons/lesson-12-python-for-networking-libraries.md
+      - Lesson 13 — Inventory & I/O (TXT / CSV / Excel): lessons/lesson-13-inventory-io-csv-excel.md
+      - Lesson 14 — Connect & Retrieve Info: lessons/lesson-14-connect-and-get-info.md
+      - Lesson 15 — Concurrency (Multi-Device): lessons/lesson-15-concurrency-multi-device.md
+      - Lesson 16 — Push Config Safely (Pre/Post Checks): lessons/lesson-16-push-config-safely.md
+
+  - 🟥 Final Part — Mindset & Next Steps:
+      - Lesson 17 — Think Like an Automation Engineer: lessons/lesson-17-mindset.md
+      - Lesson 18 — Where to Go Next: lessons/lesson-18-next-steps.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+
+extra:
+  generator: false
