@@ -10,29 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/">
+        <link rel="canonical" href="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-06-lists-dicts/">
       
       
+        <link rel="prev" href="../lesson-05-loops/">
       
-        <link rel="next" href="presentation/">
+      
+        <link rel="next" href="../lesson-07-debugging/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Python From Zero → Network Automation</title>
+        <title>Lesson 6 — Lists & Dictionaries - Python From Zero → Network Automation</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome" class="md-skip">
+        <a href="#lesson-6-lists-dictionaries" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +94,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Python From Zero → Network Automation" class="md-header__button md-logo" aria-label="Python From Zero → Network Automation" data-md-component="logo">
+    <a href="../.." title="Python From Zero → Network Automation" class="md-header__button md-logo" aria-label="Python From Zero → Network Automation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Lesson 6 — Lists & Dictionaries
             
           </span>
         </div>
@@ -202,7 +204,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Python From Zero → Network Automation" class="md-nav__button md-logo" aria-label="Python From Zero → Network Automation" data-md-component="logo">
+    <a href="../.." title="Python From Zero → Network Automation" class="md-nav__button md-logo" aria-label="Python From Zero → Network Automation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -217,35 +219,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Home
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -261,79 +238,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#welcome" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        👋 Welcome
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-this-course-works" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⚙️ How this course works
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-expected-from-you" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🎯 What is expected from you
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#who-this-course-is-for" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧑‍💻 Who this course is for
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#where-to-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚦 Where to start
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -345,7 +249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="presentation/" class="md-nav__link">
+      <a href="../../presentation/" class="md-nav__link">
         
   
   
@@ -369,8 +273,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -381,13 +287,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -408,7 +312,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -426,7 +330,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-01-print-output/" class="md-nav__link">
+      <a href="../lesson-01-print-output/" class="md-nav__link">
         
   
   
@@ -454,7 +358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-02-variables-types/" class="md-nav__link">
+      <a href="../lesson-02-variables-types/" class="md-nav__link">
         
   
   
@@ -482,7 +386,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-03-operators-logic/" class="md-nav__link">
+      <a href="../lesson-03-operators-logic/" class="md-nav__link">
         
   
   
@@ -510,7 +414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-04-conditions/" class="md-nav__link">
+      <a href="../lesson-04-conditions/" class="md-nav__link">
         
   
   
@@ -538,7 +442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-05-loops/" class="md-nav__link">
+      <a href="../lesson-05-loops/" class="md-nav__link">
         
   
   
@@ -563,10 +467,35 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="lessons/lesson-06-lists-dicts/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 6 — Lists & Dictionaries
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -582,6 +511,101 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lesson-6-lists-dictionaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lesson 6 — Lists &amp; Dictionaries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-are-about-to-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you are about to do
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lists-ordered-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lists: ordered data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dictionaries-keyvalue-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dictionaries: key/value logic
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update values
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-dictionaries-are-everywhere-in-networking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why dictionaries are everywhere in networking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -594,7 +618,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-07-debugging/" class="md-nav__link">
+      <a href="../lesson-07-debugging/" class="md-nav__link">
         
   
   
@@ -683,7 +707,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-08-functions/" class="md-nav__link">
+      <a href="../lesson-08-functions/" class="md-nav__link">
         
   
   
@@ -711,7 +735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-09-first-functions/" class="md-nav__link">
+      <a href="../lesson-09-first-functions/" class="md-nav__link">
         
   
   
@@ -739,7 +763,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-10-output-control/" class="md-nav__link">
+      <a href="../lesson-10-output-control/" class="md-nav__link">
         
   
   
@@ -767,7 +791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-11-functions-collections/" class="md-nav__link">
+      <a href="../lesson-11-functions-collections/" class="md-nav__link">
         
   
   
@@ -856,7 +880,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-12-python-for-networking-libraries/" class="md-nav__link">
+      <a href="../lesson-12-python-for-networking-libraries/" class="md-nav__link">
         
   
   
@@ -884,7 +908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-13-inventory-io-csv-excel/" class="md-nav__link">
+      <a href="../lesson-13-inventory-io-csv-excel/" class="md-nav__link">
         
   
   
@@ -912,7 +936,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-14-connect-and-get-info/" class="md-nav__link">
+      <a href="../lesson-14-connect-and-get-info/" class="md-nav__link">
         
   
   
@@ -940,7 +964,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-15-concurrency-multi-device/" class="md-nav__link">
+      <a href="../lesson-15-concurrency-multi-device/" class="md-nav__link">
         
   
   
@@ -968,7 +992,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-16-push-config-safely/" class="md-nav__link">
+      <a href="../lesson-16-push-config-safely/" class="md-nav__link">
         
   
   
@@ -1057,7 +1081,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-17-mindset/" class="md-nav__link">
+      <a href="../lesson-17-mindset/" class="md-nav__link">
         
   
   
@@ -1085,7 +1109,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-18-next-steps/" class="md-nav__link">
+      <a href="../lesson-18-next-steps/" class="md-nav__link">
         
   
   
@@ -1138,10 +1162,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#welcome" class="md-nav__link">
+  <a href="#lesson-6-lists-dictionaries" class="md-nav__link">
     <span class="md-ellipsis">
       
-        👋 Welcome
+        Lesson 6 — Lists &amp; Dictionaries
       
     </span>
   </a>
@@ -1149,10 +1173,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-this-course-works" class="md-nav__link">
+  <a href="#what-you-are-about-to-do" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚙️ How this course works
+        What you are about to do
       
     </span>
   </a>
@@ -1160,10 +1184,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-expected-from-you" class="md-nav__link">
+  <a href="#lists-ordered-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🎯 What is expected from you
+        Lists: ordered data
       
     </span>
   </a>
@@ -1171,10 +1195,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#who-this-course-is-for" class="md-nav__link">
+  <a href="#dictionaries-keyvalue-logic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧑‍💻 Who this course is for
+        Dictionaries: key/value logic
       
     </span>
   </a>
@@ -1182,10 +1206,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-to-start" class="md-nav__link">
+  <a href="#update-values" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚦 Where to start
+        Update values
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-dictionaries-are-everywhere-in-networking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why dictionaries are everywhere in networking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
       
     </span>
   </a>
@@ -1209,61 +1255,65 @@
 
 
 
-  <h1>Home</h1>
+  <h1>Lesson 6 — Lists & Dictionaries</h1>
 
-<h2 id="welcome">👋 Welcome<a class="headerlink" href="#welcome" title="Permanent link">&para;</a></h2>
-<p>This website is a <strong>practical introduction to Python</strong>.</p>
-<p>It exists to help you:</p>
-<ul>
-<li>understand what you are doing 🧠</li>
-<li>see what the computer is doing 🖥️</li>
-<li>gain confidence step by step 🚀</li>
-</ul>
-<p>This is not a reference book.<br />
-This is not theory for theory’s sake.</p>
-<p>It is a <strong>learning path</strong>.</p>
+<h2 id="lesson-6-lists-dictionaries">Lesson 6 — Lists &amp; Dictionaries<a class="headerlink" href="#lesson-6-lists-dictionaries" title="Permanent link">&para;</a></h2>
+<h2 id="what-you-are-about-to-do">What you are about to do<a class="headerlink" href="#what-you-are-about-to-do" title="Permanent link">&para;</a></h2>
+<p>In this lesson, you will:
+- understand lists (ordered data)
+- understand dictionaries (key/value data)
+- access and update values safely
+- see why dictionaries are everywhere in networking</p>
 <hr />
-<h2 id="how-this-course-works">⚙️ How this course works<a class="headerlink" href="#how-this-course-works" title="Permanent link">&para;</a></h2>
-<p>Each lesson follows the same logic:</p>
-<ul>
-<li>short explanations ✍️</li>
-<li>simple code 🧩</li>
-<li>immediate output 👀</li>
-</ul>
-<p>You read.<br />
-You run the code.<br />
-You observe the result.</p>
-<p>That’s how learning happens.</p>
+<h2 id="lists-ordered-data">Lists: ordered data<a class="headerlink" href="#lists-ordered-data" title="Permanent link">&para;</a></h2>
+<p>A list is an ordered collection.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">ports</span> <span class="o">=</span> <span class="p">[</span><span class="mi">22</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">443</span><span class="p">]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">ports</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># 22</span>
+</code></pre></div>
+<p>Pitfall:
+- index starts at 0 (not 1)</p>
 <hr />
-<h2 id="what-is-expected-from-you">🎯 What is expected from you<a class="headerlink" href="#what-is-expected-from-you" title="Permanent link">&para;</a></h2>
-<p>You are <strong>not</strong> expected to:</p>
-<ul>
-<li>understand everything</li>
-<li>remember everything</li>
-<li>be perfect</li>
-</ul>
-<p>You are expected to:</p>
-<ul>
-<li>try ✅</li>
-<li>run the code ▶️</li>
-<li>observe the output 🔍</li>
-</ul>
-<p>That’s it.</p>
+<h2 id="dictionaries-keyvalue-logic">Dictionaries: key/value logic<a class="headerlink" href="#dictionaries-keyvalue-logic" title="Permanent link">&para;</a></h2>
+<p>A dictionary maps a key to a value.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">iface</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;eth0&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;UP&quot;</span><span class="p">,</span> <span class="s2">&quot;mtu&quot;</span><span class="p">:</span> <span class="mi">1500</span><span class="p">}</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">iface</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">])</span>
+</code></pre></div>
+<p>Pitfall:
+- wrong key → KeyError</p>
+<p>Safer access:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">iface</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;speed&quot;</span><span class="p">,</span> <span class="s2">&quot;UNKNOWN&quot;</span><span class="p">))</span>
+</code></pre></div></p>
 <hr />
-<h2 id="who-this-course-is-for">🧑‍💻 Who this course is for<a class="headerlink" href="#who-this-course-is-for" title="Permanent link">&para;</a></h2>
-<p>This course is for:</p>
-<ul>
-<li>beginners 🌱</li>
-<li>engineers 🛠️</li>
-<li>curious minds 🤔</li>
-</ul>
-<p>No prior programming knowledge is required.</p>
-<p>If you can read instructions, you can start.</p>
+<h2 id="update-values">Update values<a class="headerlink" href="#update-values" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">iface</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;DOWN&quot;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">iface</span><span class="p">)</span>
+</code></pre></div>
 <hr />
-<h2 id="where-to-start">🚦 Where to start<a class="headerlink" href="#where-to-start" title="Permanent link">&para;</a></h2>
-<p>If this page makes sense to you, you are ready.</p>
-<p>➡️ Go to <strong>📘 Presentation — What is Python</strong><br />
-and understand the tool you are about to use.</p>
+<h2 id="why-dictionaries-are-everywhere-in-networking">Why dictionaries are everywhere in networking<a class="headerlink" href="#why-dictionaries-are-everywhere-in-networking" title="Permanent link">&para;</a></h2>
+<p>Networking data is naturally key/value:
+- interface name → status
+- device → IP
+- tunnel → metrics
+- VLAN → subnet</p>
+<p>Example (very real automation shape):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">device</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;EDGE-RBA-01&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="s2">&quot;mgmt_ip&quot;</span><span class="p">:</span> <span class="s2">&quot;10.10.10.10&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="s2">&quot;Rabat&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;sdwan&quot;</span><span class="p">,</span> <span class="s2">&quot;wan-edge&quot;</span><span class="p">],</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">device</span><span class="p">[</span><span class="s2">&quot;hostname&quot;</span><span class="p">],</span> <span class="n">device</span><span class="p">[</span><span class="s2">&quot;mgmt_ip&quot;</span><span class="p">])</span>
+</code></pre></div>
+<hr />
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<p>You have interface data:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">iface</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;GigabitEthernet0/0&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;down&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>Goal:
+- print <code>GigabitEthernet0/0 is DOWN</code> (uppercase status)
+- without changing the original dictionary</p>
+<p>Hint:
+- use <code>.upper()</code> on the value</p>
 
 
 
@@ -1314,10 +1364,10 @@ and understand the tool you are about to use.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

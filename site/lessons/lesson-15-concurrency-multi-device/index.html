@@ -10,29 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/">
+        <link rel="canonical" href="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-15-concurrency-multi-device/">
       
       
+        <link rel="prev" href="../lesson-14-connect-and-get-info/">
       
-        <link rel="next" href="presentation/">
+      
+        <link rel="next" href="../lesson-16-push-config-safely/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Python From Zero → Network Automation</title>
+        <title>Lesson 15 — Concurrency (Multi-Device) - Python From Zero → Network Automation</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome" class="md-skip">
+        <a href="#lesson-15-run-on-multiple-devices-concurrency" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +94,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Python From Zero → Network Automation" class="md-header__button md-logo" aria-label="Python From Zero → Network Automation" data-md-component="logo">
+    <a href="../.." title="Python From Zero → Network Automation" class="md-header__button md-logo" aria-label="Python From Zero → Network Automation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Lesson 15 — Concurrency (Multi-Device)
             
           </span>
         </div>
@@ -202,7 +204,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Python From Zero → Network Automation" class="md-nav__button md-logo" aria-label="Python From Zero → Network Automation" data-md-component="logo">
+    <a href="../.." title="Python From Zero → Network Automation" class="md-nav__button md-logo" aria-label="Python From Zero → Network Automation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -217,35 +219,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Home
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -261,79 +238,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#welcome" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        👋 Welcome
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-this-course-works" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⚙️ How this course works
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-expected-from-you" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🎯 What is expected from you
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#who-this-course-is-for" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧑‍💻 Who this course is for
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#where-to-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚦 Where to start
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -345,7 +249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="presentation/" class="md-nav__link">
+      <a href="../../presentation/" class="md-nav__link">
         
   
   
@@ -426,7 +330,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-01-print-output/" class="md-nav__link">
+      <a href="../lesson-01-print-output/" class="md-nav__link">
         
   
   
@@ -454,7 +358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-02-variables-types/" class="md-nav__link">
+      <a href="../lesson-02-variables-types/" class="md-nav__link">
         
   
   
@@ -482,7 +386,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-03-operators-logic/" class="md-nav__link">
+      <a href="../lesson-03-operators-logic/" class="md-nav__link">
         
   
   
@@ -510,7 +414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-04-conditions/" class="md-nav__link">
+      <a href="../lesson-04-conditions/" class="md-nav__link">
         
   
   
@@ -538,7 +442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-05-loops/" class="md-nav__link">
+      <a href="../lesson-05-loops/" class="md-nav__link">
         
   
   
@@ -566,7 +470,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-06-lists-dicts/" class="md-nav__link">
+      <a href="../lesson-06-lists-dicts/" class="md-nav__link">
         
   
   
@@ -594,7 +498,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-07-debugging/" class="md-nav__link">
+      <a href="../lesson-07-debugging/" class="md-nav__link">
         
   
   
@@ -683,7 +587,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-08-functions/" class="md-nav__link">
+      <a href="../lesson-08-functions/" class="md-nav__link">
         
   
   
@@ -711,7 +615,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-09-first-functions/" class="md-nav__link">
+      <a href="../lesson-09-first-functions/" class="md-nav__link">
         
   
   
@@ -739,7 +643,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-10-output-control/" class="md-nav__link">
+      <a href="../lesson-10-output-control/" class="md-nav__link">
         
   
   
@@ -767,7 +671,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-11-functions-collections/" class="md-nav__link">
+      <a href="../lesson-11-functions-collections/" class="md-nav__link">
         
   
   
@@ -799,8 +703,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -811,13 +717,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
@@ -838,7 +742,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -856,7 +760,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-12-python-for-networking-libraries/" class="md-nav__link">
+      <a href="../lesson-12-python-for-networking-libraries/" class="md-nav__link">
         
   
   
@@ -884,7 +788,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-13-inventory-io-csv-excel/" class="md-nav__link">
+      <a href="../lesson-13-inventory-io-csv-excel/" class="md-nav__link">
         
   
   
@@ -912,7 +816,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-14-connect-and-get-info/" class="md-nav__link">
+      <a href="../lesson-14-connect-and-get-info/" class="md-nav__link">
         
   
   
@@ -937,10 +841,35 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="lessons/lesson-15-concurrency-multi-device/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 15 — Concurrency (Multi-Device)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -956,6 +885,79 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lesson-15-run-on-multiple-devices-concurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lesson 15 — Run on Multiple Devices (Concurrency) 🚀
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-concurrency-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why concurrency matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-safe-mental-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The safe mental model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-collect-show-clock-from-many-devices-netmiko-threads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: collect show clock from many devices (Netmiko + threads)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -968,7 +970,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-16-push-config-safely/" class="md-nav__link">
+      <a href="../lesson-16-push-config-safely/" class="md-nav__link">
         
   
   
@@ -1057,7 +1059,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-17-mindset/" class="md-nav__link">
+      <a href="../lesson-17-mindset/" class="md-nav__link">
         
   
   
@@ -1085,7 +1087,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-18-next-steps/" class="md-nav__link">
+      <a href="../lesson-18-next-steps/" class="md-nav__link">
         
   
   
@@ -1138,10 +1140,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#welcome" class="md-nav__link">
+  <a href="#lesson-15-run-on-multiple-devices-concurrency" class="md-nav__link">
     <span class="md-ellipsis">
       
-        👋 Welcome
+        Lesson 15 — Run on Multiple Devices (Concurrency) 🚀
       
     </span>
   </a>
@@ -1149,10 +1151,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-this-course-works" class="md-nav__link">
+  <a href="#why-concurrency-matters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚙️ How this course works
+        Why concurrency matters
       
     </span>
   </a>
@@ -1160,10 +1162,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-expected-from-you" class="md-nav__link">
+  <a href="#the-safe-mental-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🎯 What is expected from you
+        The safe mental model
       
     </span>
   </a>
@@ -1171,10 +1173,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#who-this-course-is-for" class="md-nav__link">
+  <a href="#example-collect-show-clock-from-many-devices-netmiko-threads" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧑‍💻 Who this course is for
+        Example: collect show clock from many devices (Netmiko + threads)
       
     </span>
   </a>
@@ -1182,10 +1184,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-to-start" class="md-nav__link">
+  <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚦 Where to start
+        Exercise
       
     </span>
   </a>
@@ -1209,61 +1211,52 @@
 
 
 
-  <h1>Home</h1>
+  <h1>Lesson 15 — Concurrency (Multi-Device)</h1>
 
-<h2 id="welcome">👋 Welcome<a class="headerlink" href="#welcome" title="Permanent link">&para;</a></h2>
-<p>This website is a <strong>practical introduction to Python</strong>.</p>
-<p>It exists to help you:</p>
-<ul>
-<li>understand what you are doing 🧠</li>
-<li>see what the computer is doing 🖥️</li>
-<li>gain confidence step by step 🚀</li>
-</ul>
-<p>This is not a reference book.<br />
-This is not theory for theory’s sake.</p>
-<p>It is a <strong>learning path</strong>.</p>
+<h2 id="lesson-15-run-on-multiple-devices-concurrency">Lesson 15 — Run on Multiple Devices (Concurrency) 🚀<a class="headerlink" href="#lesson-15-run-on-multiple-devices-concurrency" title="Permanent link">&para;</a></h2>
+<h2 id="why-concurrency-matters">Why concurrency matters<a class="headerlink" href="#why-concurrency-matters" title="Permanent link">&para;</a></h2>
+<p>If you have:
+- 5 devices → sequential is fine
+- 50 devices → sequential is slow
+- 500 devices → sequential is pain</p>
+<p>Python can run tasks in parallel using <strong>concurrent.futures</strong>.</p>
 <hr />
-<h2 id="how-this-course-works">⚙️ How this course works<a class="headerlink" href="#how-this-course-works" title="Permanent link">&para;</a></h2>
-<p>Each lesson follows the same logic:</p>
-<ul>
-<li>short explanations ✍️</li>
-<li>simple code 🧩</li>
-<li>immediate output 👀</li>
-</ul>
-<p>You read.<br />
-You run the code.<br />
-You observe the result.</p>
-<p>That’s how learning happens.</p>
+<h2 id="the-safe-mental-model">The safe mental model<a class="headerlink" href="#the-safe-mental-model" title="Permanent link">&para;</a></h2>
+<p>One function does one device.<br />
+Then we run that function across a list of devices.</p>
 <hr />
-<h2 id="what-is-expected-from-you">🎯 What is expected from you<a class="headerlink" href="#what-is-expected-from-you" title="Permanent link">&para;</a></h2>
-<p>You are <strong>not</strong> expected to:</p>
-<ul>
-<li>understand everything</li>
-<li>remember everything</li>
-<li>be perfect</li>
-</ul>
-<p>You are expected to:</p>
-<ul>
-<li>try ✅</li>
-<li>run the code ▶️</li>
-<li>observe the output 🔍</li>
-</ul>
-<p>That’s it.</p>
+<h2 id="example-collect-show-clock-from-many-devices-netmiko-threads">Example: collect <code>show clock</code> from many devices (Netmiko + threads)<a class="headerlink" href="#example-collect-show-clock-from-many-devices-netmiko-threads" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span><span class="p">,</span> <span class="n">as_completed</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">netmiko</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConnectHandler</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">collect_clock</span><span class="p">(</span><span class="n">device</span><span class="p">):</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">conn</span> <span class="o">=</span> <span class="n">ConnectHandler</span><span class="p">(</span><span class="o">**</span><span class="n">device</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">out</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="s2">&quot;show clock&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">conn</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="k">return</span> <span class="n">device</span><span class="p">[</span><span class="s2">&quot;host&quot;</span><span class="p">],</span> <span class="n">out</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">devices</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="p">{</span><span class="s2">&quot;device_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cisco_ios&quot;</span><span class="p">,</span> <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;10.0.0.1&quot;</span><span class="p">,</span> <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;PWD&quot;</span><span class="p">},</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="p">{</span><span class="s2">&quot;device_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cisco_ios&quot;</span><span class="p">,</span> <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;10.0.0.2&quot;</span><span class="p">,</span> <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;PWD&quot;</span><span class="p">},</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">]</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">futures</span> <span class="o">=</span> <span class="p">[</span><span class="n">ex</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">collect_clock</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">devices</span><span class="p">]</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">as_completed</span><span class="p">(</span><span class="n">futures</span><span class="p">):</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="k">for</span> <span class="n">host</span><span class="p">,</span> <span class="n">clock</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="s2">&quot;=&gt;&quot;</span><span class="p">,</span> <span class="n">clock</span><span class="p">)</span>
+</code></pre></div>
+<p>Pitfalls:
+- too many threads can overload your jump host or devices
+- handle exceptions (timeouts/auth failures)</p>
 <hr />
-<h2 id="who-this-course-is-for">🧑‍💻 Who this course is for<a class="headerlink" href="#who-this-course-is-for" title="Permanent link">&para;</a></h2>
-<p>This course is for:</p>
-<ul>
-<li>beginners 🌱</li>
-<li>engineers 🛠️</li>
-<li>curious minds 🤔</li>
-</ul>
-<p>No prior programming knowledge is required.</p>
-<p>If you can read instructions, you can start.</p>
-<hr />
-<h2 id="where-to-start">🚦 Where to start<a class="headerlink" href="#where-to-start" title="Permanent link">&para;</a></h2>
-<p>If this page makes sense to you, you are ready.</p>
-<p>➡️ Go to <strong>📘 Presentation — What is Python</strong><br />
-and understand the tool you are about to use.</p>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<p>Change the function to run:
+- <code>show ip interface brief</code>
+Then print only the number of lines returned per device.</p>
 
 
 
@@ -1314,10 +1307,10 @@ and understand the tool you are about to use.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

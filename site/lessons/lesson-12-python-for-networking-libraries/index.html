@@ -10,29 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/">
+        <link rel="canonical" href="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-12-python-for-networking-libraries/">
       
       
+        <link rel="prev" href="../lesson-11-functions-collections/">
       
-        <link rel="next" href="presentation/">
+      
+        <link rel="next" href="../lesson-13-inventory-io-csv-excel/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Python From Zero → Network Automation</title>
+        <title>Lesson 12 — Libraries & the Big Picture - Python From Zero → Network Automation</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome" class="md-skip">
+        <a href="#lesson-12-python-for-networking-libraries-the-big-picture" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +94,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Python From Zero → Network Automation" class="md-header__button md-logo" aria-label="Python From Zero → Network Automation" data-md-component="logo">
+    <a href="../.." title="Python From Zero → Network Automation" class="md-header__button md-logo" aria-label="Python From Zero → Network Automation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Lesson 12 — Libraries & the Big Picture
             
           </span>
         </div>
@@ -202,7 +204,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Python From Zero → Network Automation" class="md-nav__button md-logo" aria-label="Python From Zero → Network Automation" data-md-component="logo">
+    <a href="../.." title="Python From Zero → Network Automation" class="md-nav__button md-logo" aria-label="Python From Zero → Network Automation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -217,35 +219,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Home
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -261,79 +238,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#welcome" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        👋 Welcome
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-this-course-works" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⚙️ How this course works
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-expected-from-you" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🎯 What is expected from you
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#who-this-course-is-for" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧑‍💻 Who this course is for
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#where-to-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚦 Where to start
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -345,7 +249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="presentation/" class="md-nav__link">
+      <a href="../../presentation/" class="md-nav__link">
         
   
   
@@ -426,7 +330,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-01-print-output/" class="md-nav__link">
+      <a href="../lesson-01-print-output/" class="md-nav__link">
         
   
   
@@ -454,7 +358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-02-variables-types/" class="md-nav__link">
+      <a href="../lesson-02-variables-types/" class="md-nav__link">
         
   
   
@@ -482,7 +386,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-03-operators-logic/" class="md-nav__link">
+      <a href="../lesson-03-operators-logic/" class="md-nav__link">
         
   
   
@@ -510,7 +414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-04-conditions/" class="md-nav__link">
+      <a href="../lesson-04-conditions/" class="md-nav__link">
         
   
   
@@ -538,7 +442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-05-loops/" class="md-nav__link">
+      <a href="../lesson-05-loops/" class="md-nav__link">
         
   
   
@@ -566,7 +470,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-06-lists-dicts/" class="md-nav__link">
+      <a href="../lesson-06-lists-dicts/" class="md-nav__link">
         
   
   
@@ -594,7 +498,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-07-debugging/" class="md-nav__link">
+      <a href="../lesson-07-debugging/" class="md-nav__link">
         
   
   
@@ -683,7 +587,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-08-functions/" class="md-nav__link">
+      <a href="../lesson-08-functions/" class="md-nav__link">
         
   
   
@@ -711,7 +615,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-09-first-functions/" class="md-nav__link">
+      <a href="../lesson-09-first-functions/" class="md-nav__link">
         
   
   
@@ -739,7 +643,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-10-output-control/" class="md-nav__link">
+      <a href="../lesson-10-output-control/" class="md-nav__link">
         
   
   
@@ -767,7 +671,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-11-functions-collections/" class="md-nav__link">
+      <a href="../lesson-11-functions-collections/" class="md-nav__link">
         
   
   
@@ -799,8 +703,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -811,13 +717,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
@@ -838,7 +742,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -853,10 +757,35 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="lessons/lesson-12-python-for-networking-libraries/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 12 — Libraries & the Big Picture
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -872,6 +801,162 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lesson-12-python-for-networking-libraries-the-big-picture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lesson 12 — Python for Networking: Libraries &amp; the Big Picture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-are-about-to-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you are about to do
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-is-interpreted-why-thats-good" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python is interpreted (why that’s good)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-mindset-start-from-a-need" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The mindset: start from a need
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-networking-libraries-the-ones-youll-see-in-real-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common networking libraries (the ones you’ll see in real jobs)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common networking libraries (the ones you’ll see in real jobs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ssh-cli-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH / CLI automation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-vendor-configuration-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-vendor configuration / state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network protocols
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-output-libraries-inventory-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input / Output libraries (inventory + reports)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-first-real-automation-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your first “real” automation architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mini-exercise-no-device-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mini exercise (no device required)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -884,7 +969,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-13-inventory-io-csv-excel/" class="md-nav__link">
+      <a href="../lesson-13-inventory-io-csv-excel/" class="md-nav__link">
         
   
   
@@ -912,7 +997,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-14-connect-and-get-info/" class="md-nav__link">
+      <a href="../lesson-14-connect-and-get-info/" class="md-nav__link">
         
   
   
@@ -940,7 +1025,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-15-concurrency-multi-device/" class="md-nav__link">
+      <a href="../lesson-15-concurrency-multi-device/" class="md-nav__link">
         
   
   
@@ -968,7 +1053,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-16-push-config-safely/" class="md-nav__link">
+      <a href="../lesson-16-push-config-safely/" class="md-nav__link">
         
   
   
@@ -1057,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-17-mindset/" class="md-nav__link">
+      <a href="../lesson-17-mindset/" class="md-nav__link">
         
   
   
@@ -1085,7 +1170,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lessons/lesson-18-next-steps/" class="md-nav__link">
+      <a href="../lesson-18-next-steps/" class="md-nav__link">
         
   
   
@@ -1138,10 +1223,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#welcome" class="md-nav__link">
+  <a href="#lesson-12-python-for-networking-libraries-the-big-picture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        👋 Welcome
+        Lesson 12 — Python for Networking: Libraries &amp; the Big Picture
       
     </span>
   </a>
@@ -1149,10 +1234,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-this-course-works" class="md-nav__link">
+  <a href="#what-you-are-about-to-do" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚙️ How this course works
+        What you are about to do
       
     </span>
   </a>
@@ -1160,10 +1245,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-expected-from-you" class="md-nav__link">
+  <a href="#python-is-interpreted-why-thats-good" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🎯 What is expected from you
+        Python is interpreted (why that’s good)
       
     </span>
   </a>
@@ -1171,10 +1256,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#who-this-course-is-for" class="md-nav__link">
+  <a href="#the-mindset-start-from-a-need" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧑‍💻 Who this course is for
+        The mindset: start from a need
       
     </span>
   </a>
@@ -1182,10 +1267,93 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-to-start" class="md-nav__link">
+  <a href="#common-networking-libraries-the-ones-youll-see-in-real-jobs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚦 Where to start
+        Common networking libraries (the ones you’ll see in real jobs)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common networking libraries (the ones you’ll see in real jobs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ssh-cli-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH / CLI automation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-vendor-configuration-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-vendor configuration / state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network protocols
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-output-libraries-inventory-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input / Output libraries (inventory + reports)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-first-real-automation-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your first “real” automation architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mini-exercise-no-device-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mini exercise (no device required)
       
     </span>
   </a>
@@ -1209,61 +1377,94 @@
 
 
 
-  <h1>Home</h1>
+  <h1>Lesson 12 — Libraries & the Big Picture</h1>
 
-<h2 id="welcome">👋 Welcome<a class="headerlink" href="#welcome" title="Permanent link">&para;</a></h2>
-<p>This website is a <strong>practical introduction to Python</strong>.</p>
-<p>It exists to help you:</p>
-<ul>
-<li>understand what you are doing 🧠</li>
-<li>see what the computer is doing 🖥️</li>
-<li>gain confidence step by step 🚀</li>
-</ul>
-<p>This is not a reference book.<br />
-This is not theory for theory’s sake.</p>
-<p>It is a <strong>learning path</strong>.</p>
+<h2 id="lesson-12-python-for-networking-libraries-the-big-picture">Lesson 12 — Python for Networking: Libraries &amp; the Big Picture<a class="headerlink" href="#lesson-12-python-for-networking-libraries-the-big-picture" title="Permanent link">&para;</a></h2>
+<h2 id="what-you-are-about-to-do">What you are about to do<a class="headerlink" href="#what-you-are-about-to-do" title="Permanent link">&para;</a></h2>
+<p>In this part, you will learn <strong>why Python matters</strong> for networking:
+- how Python talks to devices (SSH, APIs)
+- which libraries are common in network automation
+- how “network = data” becomes real work (inventory, reports, config pushes)
+- why you should always start from a <strong>real need</strong> and build step by step</p>
 <hr />
-<h2 id="how-this-course-works">⚙️ How this course works<a class="headerlink" href="#how-this-course-works" title="Permanent link">&para;</a></h2>
-<p>Each lesson follows the same logic:</p>
-<ul>
-<li>short explanations ✍️</li>
-<li>simple code 🧩</li>
-<li>immediate output 👀</li>
-</ul>
-<p>You read.<br />
-You run the code.<br />
-You observe the result.</p>
-<p>That’s how learning happens.</p>
+<h2 id="python-is-interpreted-why-thats-good">Python is interpreted (why that’s good)<a class="headerlink" href="#python-is-interpreted-why-thats-good" title="Permanent link">&para;</a></h2>
+<p>Python is an <strong>interpreted language</strong>:
+- you write code
+- the Python interpreter runs it immediately</p>
+<p>Why it helps:
+- fast feedback (run → see output → adjust)
+- easy debugging
+- perfect for iterative automation</p>
 <hr />
-<h2 id="what-is-expected-from-you">🎯 What is expected from you<a class="headerlink" href="#what-is-expected-from-you" title="Permanent link">&para;</a></h2>
-<p>You are <strong>not</strong> expected to:</p>
-<ul>
-<li>understand everything</li>
-<li>remember everything</li>
-<li>be perfect</li>
-</ul>
-<p>You are expected to:</p>
-<ul>
-<li>try ✅</li>
-<li>run the code ▶️</li>
-<li>observe the output 🔍</li>
-</ul>
-<p>That’s it.</p>
+<h2 id="the-mindset-start-from-a-need">The mindset: start from a need<a class="headerlink" href="#the-mindset-start-from-a-need" title="Permanent link">&para;</a></h2>
+<p>The best scripts are not “cool scripts”.<br />
+They are scripts that solve a real pain.</p>
+<p>Example needs:
+- “I need to check BGP status on 50 routers every morning.”
+- “I need to push a safe config snippet on 80 sites.”
+- “I need a report in Excel for management.”</p>
+<p>Rule:</p>
+<blockquote>
+<p>Need → small steps → reliable output → scale</p>
+</blockquote>
 <hr />
-<h2 id="who-this-course-is-for">🧑‍💻 Who this course is for<a class="headerlink" href="#who-this-course-is-for" title="Permanent link">&para;</a></h2>
-<p>This course is for:</p>
+<h2 id="common-networking-libraries-the-ones-youll-see-in-real-jobs">Common networking libraries (the ones you’ll see in real jobs)<a class="headerlink" href="#common-networking-libraries-the-ones-youll-see-in-real-jobs" title="Permanent link">&para;</a></h2>
+<h3 id="ssh-cli-automation">SSH / CLI automation<a class="headerlink" href="#ssh-cli-automation" title="Permanent link">&para;</a></h3>
 <ul>
-<li>beginners 🌱</li>
-<li>engineers 🛠️</li>
-<li>curious minds 🤔</li>
+<li><strong>Netmiko</strong>: simple SSH automation to network devices (popular, practical)</li>
+<li><strong>Scrapli</strong>: modern alternative (fast, clean)</li>
+<li><strong>Paramiko</strong>: low-level SSH building block (more manual)</li>
 </ul>
-<p>No prior programming knowledge is required.</p>
-<p>If you can read instructions, you can start.</p>
+<h3 id="multi-vendor-configuration-state">Multi-vendor configuration / state<a class="headerlink" href="#multi-vendor-configuration-state" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>NAPALM</strong>: vendor abstraction (get facts, interfaces, config, etc.)</li>
+</ul>
+<h3 id="network-protocols">Network protocols<a class="headerlink" href="#network-protocols" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>ncclient</strong>: NETCONF (structured configs, automation workflows)</li>
+<li><strong>pygnmi</strong>: gNMI (telemetry / config on supported platforms)</li>
+</ul>
+<h3 id="apis">APIs<a class="headerlink" href="#apis" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>requests</strong>: talk to REST APIs (controllers, SD-WAN managers, cloud)</li>
+</ul>
 <hr />
-<h2 id="where-to-start">🚦 Where to start<a class="headerlink" href="#where-to-start" title="Permanent link">&para;</a></h2>
-<p>If this page makes sense to you, you are ready.</p>
-<p>➡️ Go to <strong>📘 Presentation — What is Python</strong><br />
-and understand the tool you are about to use.</p>
+<h2 id="input-output-libraries-inventory-reports">Input / Output libraries (inventory + reports)<a class="headerlink" href="#input-output-libraries-inventory-reports" title="Permanent link">&para;</a></h2>
+<p>Automation is not just connecting.<br />
+It is also reading/writing data.</p>
+<p>Common ones:
+- <code>csv</code> (built-in): read/write CSV device inventories
+- <code>json</code> (built-in): structured data and APIs
+- <code>pathlib</code> (built-in): safe file paths
+- <code>openpyxl</code> (Excel): read/write <code>.xlsx</code>
+- <code>pandas</code> (dataframes): reports + Excel + CSV fast
+- <code>yaml</code> (PyYAML): config files and inventories (common in automation)</p>
+<hr />
+<h2 id="your-first-real-automation-architecture">Your first “real” automation architecture<a class="headerlink" href="#your-first-real-automation-architecture" title="Permanent link">&para;</a></h2>
+<p>A good network script usually looks like this:</p>
+<ol>
+<li><strong>Input</strong>: load devices from CSV/Excel/YAML</li>
+<li><strong>Connect</strong>: SSH/API</li>
+<li><strong>Collect</strong>: run commands / get facts</li>
+<li><strong>Decide</strong>: logic checks (OK/ALERT)</li>
+<li><strong>Output</strong>: clean summary + save report</li>
+</ol>
+<p>Keep it simple. Then scale.</p>
+<hr />
+<h2 id="mini-exercise-no-device-required">Mini exercise (no device required)<a class="headerlink" href="#mini-exercise-no-device-required" title="Permanent link">&para;</a></h2>
+<p>Make a tiny inventory and print it cleanly:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">devices</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="p">{</span><span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;EDGE-RBA-01&quot;</span><span class="p">,</span> <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="s2">&quot;10.0.0.1&quot;</span><span class="p">,</span> <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="s2">&quot;Rabat&quot;</span><span class="p">},</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="p">{</span><span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;EDGE-CAS-01&quot;</span><span class="p">,</span> <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="s2">&quot;10.0.0.2&quot;</span><span class="p">,</span> <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="s2">&quot;Casablanca&quot;</span><span class="p">},</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">]</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">devices</span><span class="p">:</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;hostname&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;ip&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; | &quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Expected output:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>EDGE-RBA-01 | 10.0.0.1 | Rabat
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>EDGE-CAS-01 | 10.0.0.2 | Casablanca
+</code></pre></div></p>
 
 
 
@@ -1314,10 +1515,10 @@ and understand the tool you are about to use.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

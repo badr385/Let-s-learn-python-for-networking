@@ -48,7 +48,10 @@ nav:
   - 🟥 Final Part — Mindset & Next Steps:
       - Lesson 17 — Think Like an Automation Engineer: lessons/lesson-17-mindset.md
       - Lesson 18 — Where to Go Next: lessons/lesson-18-next-steps.md
-
+      
+  - 🔧 Real Automation Examples:
+      - Network Automation (Real Life): examples/real-life-network-automation-examples.md
+      
 markdown_extensions:
   - admonition
   - attr_list

@@ -2,18 +2,102 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-06</lastmod>
     </url>
     <url>
          <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/presentation/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/01_presentation/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-01-print-output/</loc>
+         <lastmod>2026-01-06</lastmod>
     </url>
     <url>
-         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/01_welcome/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-02-variables-types/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-03-operators-logic/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-04-conditions/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-05-loops/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-06-lists-dicts/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-07-debugging/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-08-functions/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-09-first-functions/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-10-output-control/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-11-functions-collections/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-12-network-data/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-12-python-for-networking-libraries/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-13-inventory-io-csv-excel/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-13-network-usecases/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-14-connect-and-get-info/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-14-network-functions/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-15-concurrency-multi-device/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-15-parsing/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-16-mini-automation/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-16-push-config-safely/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-17-mindset/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/lessons/lesson-18-next-steps/</loc>
+         <lastmod>2026-01-06</lastmod>
     </url>
 </urlset>
