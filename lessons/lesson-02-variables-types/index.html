@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1915,7 +1915,7 @@
 <hr />
 <h2 id="what-is-a-variable-simple-definition">What is a variable (simple definition)</h2>
 <p>A variable is a <strong>label</strong> that points to a value.</p>
-<div class="highlight"><pre><span></span><code><span class="n">site</span> <span class="o">=</span> <span class="s2">&quot;Rabat&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">site</span> <span class="o">=</span> <span class="s2">"Rabat"</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
 </code></pre></div>
 <p>Think of it like a sticky note on a box.</p>
@@ -1927,7 +1927,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">mtu</span><span class="p">,</span> <span class="n">delay_ms</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="strings-text">Strings (text)</h3>
-<div class="highlight"><pre><span></span><code><span class="n">hostname</span> <span class="o">=</span> <span class="s2">&quot;EDGE-RBA-01&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">hostname</span> <span class="o">=</span> <span class="s2">"EDGE-RBA-01"</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">hostname</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="booleans-true-false">Booleans (True / False)</h3>
@@ -1940,7 +1940,7 @@
 <h3 id="trap-1-quotes-change-everything">Trap 1 — Quotes change everything</h3>
 <p>These are NOT the same:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="mi">22</span><span class="p">)</span>      <span class="c1"># number</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;22&quot;</span><span class="p">)</span>    <span class="c1"># text</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"22"</span><span class="p">)</span>    <span class="c1"># text</span>
 </code></pre></div>
 <p>Why it matters in networking:
 - numbers are used for math (counters, timers, VLAN IDs)
@@ -1950,18 +1950,18 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># compare (True)</span>
 </code></pre></div>
 <h3 id="trap-3-python-is-case-sensitive">Trap 3 — Python is case-sensitive</h3>
-<div class="highlight"><pre><span></span><code><span class="n">Status</span> <span class="o">=</span> <span class="s2">&quot;UP&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">Status</span> <span class="o">=</span> <span class="s2">"UP"</span>
 <span class="c1"># print(status)  # NameError (different name)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">Status</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="reassigning-values-normal-and-useful">Reassigning values (normal and useful)</h2>
 <p>Variables can change over time:</p>
-<div class="highlight"><pre><span></span><code><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;DOWN&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Before:&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">status</span> <span class="o">=</span> <span class="s2">"DOWN"</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Before:"</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
 
-<span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;UP&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After:&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+<span class="n">status</span> <span class="o">=</span> <span class="s2">"UP"</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"After:"</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
 </code></pre></div>
 <p>This is how you model “state” (like interface status).</p>
 <hr />
@@ -1973,7 +1973,7 @@
 </ul>
 <p>Example:
 <div class="highlight"><pre><span></span><code><span class="n">vlan</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">iface</span> <span class="o">=</span> <span class="s2">&quot;GigabitEthernet0/0&quot;</span>
+<span class="n">iface</span> <span class="o">=</span> <span class="s2">"GigabitEthernet0/0"</span>
 </code></pre></div>
 Mental reading:
 - “vlan equals 100”
@@ -1981,13 +1981,13 @@ Mental reading:
 <hr />
 <h2 id="network-mini-lab-build-a-clean-status-line">Network mini-lab: build a clean status line</h2>
 <p>Run this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">hostname</span> <span class="o">=</span> <span class="s2">&quot;EDGE-RBA-01&quot;</span>
-<span class="n">iface</span> <span class="o">=</span> <span class="s2">&quot;GigabitEthernet0/0&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">hostname</span> <span class="o">=</span> <span class="s2">"EDGE-RBA-01"</span>
+<span class="n">iface</span> <span class="o">=</span> <span class="s2">"GigabitEthernet0/0"</span>
 <span class="n">is_up</span> <span class="o">=</span> <span class="kc">True</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Host:&quot;</span><span class="p">,</span> <span class="n">hostname</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Interface:&quot;</span><span class="p">,</span> <span class="n">iface</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Up:&quot;</span><span class="p">,</span> <span class="n">is_up</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Host:"</span><span class="p">,</span> <span class="n">hostname</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Interface:"</span><span class="p">,</span> <span class="n">iface</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Up:"</span><span class="p">,</span> <span class="n">is_up</span><span class="p">)</span>
 </code></pre></div>
 <p>Now change:
 - hostname
@@ -2005,14 +2005,14 @@ Print this exact output (with your own values):</p>
 - use ONE <code>print()</code> call
 - use <code>sep=" | "</code></p>
 <p>Starter:</p>
-<div class="highlight"><pre><span></span><code><span class="n">hostname</span> <span class="o">=</span> <span class="s2">&quot;EDGE-RBA-01&quot;</span>
-<span class="n">iface</span> <span class="o">=</span> <span class="s2">&quot;GigabitEthernet0/0&quot;</span>
-<span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;UP&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">hostname</span> <span class="o">=</span> <span class="s2">"EDGE-RBA-01"</span>
+<span class="n">iface</span> <span class="o">=</span> <span class="s2">"GigabitEthernet0/0"</span>
+<span class="n">status</span> <span class="o">=</span> <span class="s2">"UP"</span>
 
 <span class="c1"># your print here</span>
 </code></pre></div>
 <p>Expected solution pattern:
-<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">iface</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; | &quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">iface</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">" | "</span><span class="p">)</span>
 </code></pre></div></p>
 
 
@@ -2072,7 +2072,7 @@ Print this exact output (with your own values):</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.top", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

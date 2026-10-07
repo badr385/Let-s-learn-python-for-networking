@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1659,31 +1659,31 @@
 
 <h2 id="lesson-13-simple-network-use-cases">Lesson 13 — Simple Network Use Cases</h2>
 <h2 id="use-case-check-interface-status">Use case: check interface status</h2>
-<div class="highlight"><pre><span></span><code><span class="n">iface</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Gi0/0&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;down&quot;</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="n">iface</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Gi0/0"</span><span class="p">,</span> <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"down"</span><span class="p">}</span>
 
-<span class="k">if</span> <span class="n">iface</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;up&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ALERT:&quot;</span><span class="p">,</span> <span class="n">iface</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="s2">&quot;is DOWN&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">iface</span><span class="p">[</span><span class="s2">"status"</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">"up"</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"ALERT:"</span><span class="p">,</span> <span class="n">iface</span><span class="p">[</span><span class="s2">"name"</span><span class="p">],</span> <span class="s2">"is DOWN"</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="use-case-count-down-interfaces">Use case: count down interfaces</h2>
 <div class="highlight"><pre><span></span><code><span class="n">interfaces</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Gi0/0&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;up&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Gi0/1&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;down&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Gi0/2&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;down&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Gi0/0"</span><span class="p">,</span> <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"up"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Gi0/1"</span><span class="p">,</span> <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"down"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Gi0/2"</span><span class="p">,</span> <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"down"</span><span class="p">},</span>
 <span class="p">]</span>
 
 <span class="n">down</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">iface</span> <span class="ow">in</span> <span class="n">interfaces</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">iface</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;up&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">iface</span><span class="p">[</span><span class="s2">"status"</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">"up"</span><span class="p">:</span>
         <span class="n">down</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Down:&quot;</span><span class="p">,</span> <span class="n">down</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Down:"</span><span class="p">,</span> <span class="n">down</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="use-case-validate-values">Use case: validate values</h2>
 <div class="highlight"><pre><span></span><code><span class="n">mtu</span> <span class="o">=</span> <span class="mi">1400</span>
 <span class="k">if</span> <span class="n">mtu</span> <span class="o">!=</span> <span class="mi">1500</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MTU mismatch:&quot;</span><span class="p">,</span> <span class="n">mtu</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"MTU mismatch:"</span><span class="p">,</span> <span class="n">mtu</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="exercise">Exercise</h2>
@@ -1747,7 +1747,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.top", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1710,32 +1710,32 @@
 - understand when loops stop</p>
 <hr />
 <h2 id="for-loop-repeat-for-each-item"><code>for</code> loop (repeat for each item)</h2>
-<div class="highlight"><pre><span></span><code><span class="n">interfaces</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;eth0&quot;</span><span class="p">,</span> <span class="s2">&quot;eth1&quot;</span><span class="p">,</span> <span class="s2">&quot;eth2&quot;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="n">interfaces</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"eth0"</span><span class="p">,</span> <span class="s2">"eth1"</span><span class="p">,</span> <span class="s2">"eth2"</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">iface</span> <span class="ow">in</span> <span class="n">interfaces</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Checking&quot;</span><span class="p">,</span> <span class="n">iface</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Checking"</span><span class="p">,</span> <span class="n">iface</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="counting-with-conditions">Counting with conditions</h2>
 <div class="highlight"><pre><span></span><code><span class="n">interfaces</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;eth0&quot;</span><span class="p">,</span> <span class="s2">&quot;up&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;eth1&quot;</span><span class="p">,</span> <span class="s2">&quot;up&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;eth2&quot;</span><span class="p">,</span> <span class="s2">&quot;up&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"eth0"</span><span class="p">,</span> <span class="s2">"up"</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"eth1"</span><span class="p">,</span> <span class="s2">"up"</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"eth2"</span><span class="p">,</span> <span class="s2">"up"</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
 <span class="p">]</span>
 
 <span class="n">down</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">iface</span> <span class="ow">in</span> <span class="n">interfaces</span><span class="p">:</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">iface</span><span class="p">[</span><span class="s2">&quot;up&quot;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">iface</span><span class="p">[</span><span class="s2">"up"</span><span class="p">]:</span>
         <span class="n">down</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Down interfaces:&quot;</span><span class="p">,</span> <span class="n">down</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Down interfaces:"</span><span class="p">,</span> <span class="n">down</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="the-biggest-pitfall-infinite-while-loops">The biggest pitfall: infinite <code>while</code> loops</h2>
 <p>A <code>while</code> loop repeats while the condition is True.</p>
 <div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">while</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x =&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"x ="</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
 </code></pre></div>
 <p>If you forget <code>x += 1</code>, it can run forever.</p>
@@ -1747,21 +1747,21 @@
 
 <span class="k">while</span> <span class="n">attempts</span> <span class="o">&lt;</span> <span class="n">max_attempts</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">ping_ok</span><span class="p">:</span>
     <span class="n">attempts</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Attempt&quot;</span><span class="p">,</span> <span class="n">attempts</span><span class="p">,</span> <span class="s2">&quot;- ping...&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Attempt"</span><span class="p">,</span> <span class="n">attempts</span><span class="p">,</span> <span class="s2">"- ping..."</span><span class="p">)</span>
 
     <span class="c1"># pretend we succeed on the 3rd try</span>
     <span class="k">if</span> <span class="n">attempts</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
         <span class="n">ping_ok</span> <span class="o">=</span> <span class="kc">True</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ping OK:&quot;</span><span class="p">,</span> <span class="n">ping_ok</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ping OK:"</span><span class="p">,</span> <span class="n">ping_ok</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="exercise">Exercise</h2>
 <p>You have a list of devices. Print only the ones in France.</p>
 <div class="highlight"><pre><span></span><code><span class="n">devices</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;RBA-EDGE-01&quot;</span><span class="p">,</span> <span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;MA&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PAR-EDGE-01&quot;</span><span class="p">,</span> <span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;FR&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;LYO-EDGE-02&quot;</span><span class="p">,</span> <span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;FR&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"RBA-EDGE-01"</span><span class="p">,</span> <span class="s2">"country"</span><span class="p">:</span> <span class="s2">"MA"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"PAR-EDGE-01"</span><span class="p">,</span> <span class="s2">"country"</span><span class="p">:</span> <span class="s2">"FR"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"LYO-EDGE-02"</span><span class="p">,</span> <span class="s2">"country"</span><span class="p">:</span> <span class="s2">"FR"</span><span class="p">},</span>
 <span class="p">]</span>
 </code></pre></div>
 <p>Expected output:
@@ -1826,7 +1826,7 @@ LYO-EDGE-02
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.top", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

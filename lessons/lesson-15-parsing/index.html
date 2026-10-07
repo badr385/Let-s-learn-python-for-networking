@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1548,13 +1548,13 @@
 <p>Parsing means extracting information from text.</p>
 <hr />
 <h2 id="searching-for-patterns">Searching for patterns</h2>
-<div class="highlight"><pre><span></span><code><span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;Gi0/0 is up</span><span class="se">\n</span><span class="s2">Gi0/1 is down</span><span class="se">\n</span><span class="s2">&quot;</span>
-<span class="k">if</span> <span class="s2">&quot;down&quot;</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Some interface is down&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">output</span> <span class="o">=</span> <span class="s2">"Gi0/0 is up</span><span class="se">\n</span><span class="s2">Gi0/1 is down</span><span class="se">\n</span><span class="s2">"</span>
+<span class="k">if</span> <span class="s2">"down"</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Some interface is down"</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="extracting-with-split-simple">Extracting with split (simple)</h2>
-<div class="highlight"><pre><span></span><code><span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;Gi0/1 is down&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">line</span> <span class="o">=</span> <span class="s2">"Gi0/1 is down"</span>
 <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 <span class="n">iface</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">status</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -1572,7 +1572,7 @@
 <hr />
 <h2 id="exercise">Exercise</h2>
 <p>Given this output:</p>
-<div class="highlight"><pre><span></span><code><span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;Gi0/0 up</span><span class="se">\n</span><span class="s2">Gi0/1 down</span><span class="se">\n</span><span class="s2">Gi0/2 up</span><span class="se">\n</span><span class="s2">&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">output</span> <span class="o">=</span> <span class="s2">"Gi0/0 up</span><span class="se">\n</span><span class="s2">Gi0/1 down</span><span class="se">\n</span><span class="s2">Gi0/2 up</span><span class="se">\n</span><span class="s2">"</span>
 </code></pre></div>
 <p>Print only the down interface name.</p>
 
@@ -1633,7 +1633,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.top", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

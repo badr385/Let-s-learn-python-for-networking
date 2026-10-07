@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1813,7 +1813,7 @@
 <div class="highlight"><pre><span></span><code><span class="n">temperature</span> <span class="o">=</span> <span class="mi">31</span>
 
 <span class="k">if</span> <span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hot&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Hot"</span><span class="p">)</span>
 </code></pre></div>
 <p>If the condition is True, the block runs.</p>
 <hr />
@@ -1821,11 +1821,11 @@
 <div class="highlight"><pre><span></span><code><span class="n">score</span> <span class="o">=</span> <span class="mi">75</span>
 
 <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
 <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"C"</span><span class="p">)</span>
 </code></pre></div>
 <p>Python checks from top to bottom and stops at the first match.</p>
 <hr />
@@ -1835,32 +1835,32 @@
 <h3 id="mistake-2-using-instead-of">Mistake 2 — using <code>=</code> instead of <code>==</code></h3>
 <div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OK&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"OK"</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="mistake-3-comparing-text-with-wrong-case">Mistake 3 — comparing text with wrong case</h3>
-<div class="highlight"><pre><span></span><code><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;up&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;UP&quot;</span><span class="p">)</span>  <span class="c1"># False</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;UP&quot;</span><span class="p">)</span>  <span class="c1"># True</span>
+<div class="highlight"><pre><span></span><code><span class="n">status</span> <span class="o">=</span> <span class="s2">"up"</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="s2">"UP"</span><span class="p">)</span>  <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"UP"</span><span class="p">)</span>  <span class="c1"># True</span>
 </code></pre></div>
 <hr />
 <h2 id="network-example-interpret-interface-status">Network example: interpret interface status</h2>
-<div class="highlight"><pre><span></span><code><span class="n">iface</span> <span class="o">=</span> <span class="s2">&quot;GigabitEthernet0/0&quot;</span>
-<span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;up&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">iface</span> <span class="o">=</span> <span class="s2">"GigabitEthernet0/0"</span>
+<span class="n">status</span> <span class="o">=</span> <span class="s2">"up"</span>
 
-<span class="k">if</span> <span class="n">status</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;up&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">iface</span><span class="p">,</span> <span class="s2">&quot;is UP&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">status</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"up"</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iface</span><span class="p">,</span> <span class="s2">"is UP"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">iface</span><span class="p">,</span> <span class="s2">&quot;is DOWN&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iface</span><span class="p">,</span> <span class="s2">"is DOWN"</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="network-example-multi-level-decision">Network example: multi-level decision</h2>
 <div class="highlight"><pre><span></span><code><span class="n">cpu</span> <span class="o">=</span> <span class="mi">83</span>
 <span class="k">if</span> <span class="n">cpu</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CRITICAL&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"CRITICAL"</span><span class="p">)</span>
 <span class="k">elif</span> <span class="n">cpu</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"WARNING"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OK&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"OK"</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="exercise">Exercise</h2>
@@ -1869,7 +1869,7 @@
 - if <code>site</code> is "Rabat" and <code>link_up</code> is True → print "Rabat link OK"
 - else → print "Check link"</p>
 <p>Starter:</p>
-<div class="highlight"><pre><span></span><code><span class="n">site</span> <span class="o">=</span> <span class="s2">&quot;Rabat&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">site</span> <span class="o">=</span> <span class="s2">"Rabat"</span>
 <span class="n">link_up</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="c1"># your if here</span>
@@ -1932,7 +1932,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.top", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

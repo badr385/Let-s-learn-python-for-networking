@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1945,45 +1945,45 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">load_devices_txt</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    devices.txt format (one per line):</span>
 <span class="sd">    ip,device_type,site,hostname</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">    10.0.0.1,cisco_ios,Rabat,EDGE-RBA-01</span>
 <span class="sd">    10.0.0.2,cisco_ios,Casa,EDGE-CAS-01</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">devices</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"#"</span><span class="p">):</span>
                 <span class="k">continue</span>
-            <span class="n">parts</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)]</span>
+            <span class="n">parts</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)]</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bad line in </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Bad line in </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
             <span class="n">ip</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">device_type</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">site</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">site</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="s2">""</span>
             <span class="n">hostname</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="k">else</span> <span class="n">ip</span>
-            <span class="n">devices</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="n">ip</span><span class="p">,</span> <span class="s2">&quot;device_type&quot;</span><span class="p">:</span> <span class="n">device_type</span><span class="p">,</span> <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="n">site</span><span class="p">,</span> <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="n">hostname</span><span class="p">})</span>
+            <span class="n">devices</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"ip"</span><span class="p">:</span> <span class="n">ip</span><span class="p">,</span> <span class="s2">"device_type"</span><span class="p">:</span> <span class="n">device_type</span><span class="p">,</span> <span class="s2">"site"</span><span class="p">:</span> <span class="n">site</span><span class="p">,</span> <span class="s2">"hostname"</span><span class="p">:</span> <span class="n">hostname</span><span class="p">})</span>
     <span class="k">return</span> <span class="n">devices</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">load_devices_csv</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    devices.csv columns:</span>
 <span class="sd">    hostname,ip,device_type,site</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="sd">    """</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">load_devices_excel</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    devices.xlsx columns:</span>
 <span class="sd">    hostname | ip | device_type | site</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">"records"</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="2-output-writers-txt-log-excel-report">2) Output writers (TXT log + Excel report)</h2>
@@ -1991,9 +1991,9 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">write_txt_log</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lines</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated: </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Generated: </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">write_excel_report</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rows</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
@@ -2016,69 +2016,69 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">netmiko.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">NetmikoTimeoutException</span><span class="p">,</span> <span class="n">NetmikoAuthenticationException</span>
 
 <span class="c1"># Choose ONE inventory method:</span>
-<span class="c1"># devices = load_devices_txt(&quot;devices.txt&quot;)</span>
-<span class="n">devices</span> <span class="o">=</span> <span class="n">load_devices_csv</span><span class="p">(</span><span class="s2">&quot;devices.csv&quot;</span><span class="p">)</span>
-<span class="c1"># devices = load_devices_excel(&quot;devices.xlsx&quot;)</span>
+<span class="c1"># devices = load_devices_txt("devices.txt")</span>
+<span class="n">devices</span> <span class="o">=</span> <span class="n">load_devices_csv</span><span class="p">(</span><span class="s2">"devices.csv"</span><span class="p">)</span>
+<span class="c1"># devices = load_devices_excel("devices.xlsx")</span>
 
-<span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Username: &quot;</span><span class="p">)</span>
-<span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s2">&quot;Password (hidden): &quot;</span><span class="p">)</span>
+<span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"Username: "</span><span class="p">)</span>
+<span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s2">"Password (hidden): "</span><span class="p">)</span>
 
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">log_lines</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">devices</span><span class="p">:</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;ip&quot;</span><span class="p">]</span>
-    <span class="n">device_type</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;device_type&quot;</span><span class="p">,</span> <span class="s2">&quot;cisco_ios&quot;</span><span class="p">)</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">"ip"</span><span class="p">]</span>
+    <span class="n">device_type</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"device_type"</span><span class="p">,</span> <span class="s2">"cisco_ios"</span><span class="p">)</span>
 
     <span class="n">device</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;device_type&quot;</span><span class="p">:</span> <span class="n">device_type</span><span class="p">,</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
-        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
-        <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
+        <span class="s2">"device_type"</span><span class="p">:</span> <span class="n">device_type</span><span class="p">,</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
+        <span class="s2">"username"</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+        <span class="s2">"password"</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">conn</span> <span class="o">=</span> <span class="n">ConnectHandler</span><span class="p">(</span><span class="o">**</span><span class="n">device</span><span class="p">)</span>
 
         <span class="c1"># Retrieve static routes from running config (IOS style)</span>
-        <span class="n">raw</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="s2">&quot;show running-config | section ^ip route&quot;</span><span class="p">)</span>
+        <span class="n">raw</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="s2">"show running-config | section ^ip route"</span><span class="p">)</span>
         <span class="n">conn</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
 
         <span class="n">routes_10</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">raw</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
             <span class="c1"># Handles: ip route 10.x.x.x &lt;mask&gt; &lt;nexthop&gt;</span>
-            <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^ip route\s+(10\.\d+\.\d+\.\d+)\s+(\S+)\s+(\S+)&quot;</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^ip route\s+(10\.\d+\.\d+\.\d+)\s+(\S+)\s+(\S+)"</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
             <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
                 <span class="n">prefix</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">nh</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
-                <span class="n">routes_10</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">mask</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">nh</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">routes_10</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">mask</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">nh</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
         <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-            <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">),</span>
-            <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
-            <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="s2">&quot;routes_10_count&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">routes_10</span><span class="p">),</span>
-            <span class="s2">&quot;routes_10&quot;</span><span class="p">:</span> <span class="s2">&quot; ; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">routes_10</span><span class="p">),</span>
-            <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">"hostname"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hostname"</span><span class="p">,</span> <span class="n">host</span><span class="p">),</span>
+            <span class="s2">"ip"</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
+            <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">"routes_10_count"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">routes_10</span><span class="p">),</span>
+            <span class="s2">"routes_10"</span><span class="p">:</span> <span class="s2">" ; "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">routes_10</span><span class="p">),</span>
+            <span class="s2">"error"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
         <span class="p">})</span>
 
-        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2"> | OK | routes_10=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">routes_10</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2"> | OK | routes_10=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">routes_10</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="p">(</span><span class="n">NetmikoTimeoutException</span><span class="p">,</span> <span class="n">NetmikoAuthenticationException</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-            <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">),</span>
-            <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
-            <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="s2">&quot;routes_10_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;routes_10&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+            <span class="s2">"hostname"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hostname"</span><span class="p">,</span> <span class="n">host</span><span class="p">),</span>
+            <span class="s2">"ip"</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
+            <span class="s2">"success"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"routes_10_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"routes_10"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"error"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
         <span class="p">})</span>
-        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2"> | FAIL | </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2"> | FAIL | </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="n">ts</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
-<span class="n">write_txt_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;routes10_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.txt&quot;</span><span class="p">,</span> <span class="n">log_lines</span><span class="p">)</span>
-<span class="n">write_excel_report</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;routes10_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.xlsx&quot;</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S"</span><span class="p">)</span>
+<span class="n">write_txt_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">"routes10_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.txt"</span><span class="p">,</span> <span class="n">log_lines</span><span class="p">)</span>
+<span class="n">write_excel_report</span><span class="p">(</span><span class="sa">f</span><span class="s2">"routes10_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.xlsx"</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done. Outputs created.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Done. Outputs created."</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="4-script-b-cisco-collect-facts-hostname-ios-version-uptime">4) Script B — Cisco: collect facts (hostname, IOS version, uptime)</h2>
@@ -2094,65 +2094,65 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">netmiko</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConnectHandler</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">netmiko.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">NetmikoTimeoutException</span><span class="p">,</span> <span class="n">NetmikoAuthenticationException</span>
 
-<span class="n">devices</span> <span class="o">=</span> <span class="n">load_devices_csv</span><span class="p">(</span><span class="s2">&quot;devices.csv&quot;</span><span class="p">)</span>
+<span class="n">devices</span> <span class="o">=</span> <span class="n">load_devices_csv</span><span class="p">(</span><span class="s2">"devices.csv"</span><span class="p">)</span>
 
-<span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Username: &quot;</span><span class="p">)</span>
-<span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s2">&quot;Password (hidden): &quot;</span><span class="p">)</span>
+<span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"Username: "</span><span class="p">)</span>
+<span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s2">"Password (hidden): "</span><span class="p">)</span>
 
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">log_lines</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">devices</span><span class="p">:</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;ip&quot;</span><span class="p">]</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">"ip"</span><span class="p">]</span>
     <span class="n">device</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;device_type&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;device_type&quot;</span><span class="p">,</span> <span class="s2">&quot;cisco_ios&quot;</span><span class="p">),</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
-        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
-        <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
+        <span class="s2">"device_type"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"device_type"</span><span class="p">,</span> <span class="s2">"cisco_ios"</span><span class="p">),</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
+        <span class="s2">"username"</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+        <span class="s2">"password"</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">conn</span> <span class="o">=</span> <span class="n">ConnectHandler</span><span class="p">(</span><span class="o">**</span><span class="n">device</span><span class="p">)</span>
 
-        <span class="n">hostname_out</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="s2">&quot;show run | i ^hostname&quot;</span><span class="p">)</span>
-        <span class="n">show_ver</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="s2">&quot;show version&quot;</span><span class="p">)</span>
+        <span class="n">hostname_out</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="s2">"show run | i ^hostname"</span><span class="p">)</span>
+        <span class="n">show_ver</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="s2">"show version"</span><span class="p">)</span>
 
         <span class="n">conn</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
 
-        <span class="n">hostname</span> <span class="o">=</span> <span class="n">hostname_out</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">hostname_out</span> <span class="k">else</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">)</span>
+        <span class="n">hostname</span> <span class="o">=</span> <span class="n">hostname_out</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"hostname"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">hostname_out</span> <span class="k">else</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hostname"</span><span class="p">,</span> <span class="n">host</span><span class="p">)</span>
 
-        <span class="n">ver_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Version\s+([\w\.\(\)\-]+)&quot;</span><span class="p">,</span> <span class="n">show_ver</span><span class="p">)</span>
-        <span class="n">ios_version</span> <span class="o">=</span> <span class="n">ver_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">ver_match</span> <span class="k">else</span> <span class="s2">&quot;UNKNOWN&quot;</span>
+        <span class="n">ver_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Version\s+([\w\.\(\)\-]+)"</span><span class="p">,</span> <span class="n">show_ver</span><span class="p">)</span>
+        <span class="n">ios_version</span> <span class="o">=</span> <span class="n">ver_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">ver_match</span> <span class="k">else</span> <span class="s2">"UNKNOWN"</span>
 
-        <span class="n">uptime_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;uptime is (.+)&quot;</span><span class="p">,</span> <span class="n">show_ver</span><span class="p">)</span>
-        <span class="n">uptime</span> <span class="o">=</span> <span class="n">uptime_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">uptime_match</span> <span class="k">else</span> <span class="s2">&quot;UNKNOWN&quot;</span>
+        <span class="n">uptime_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">"uptime is (.+)"</span><span class="p">,</span> <span class="n">show_ver</span><span class="p">)</span>
+        <span class="n">uptime</span> <span class="o">=</span> <span class="n">uptime_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">uptime_match</span> <span class="k">else</span> <span class="s2">"UNKNOWN"</span>
 
         <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-            <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="n">hostname</span><span class="p">,</span>
-            <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
-            <span class="s2">&quot;ios_version&quot;</span><span class="p">:</span> <span class="n">ios_version</span><span class="p">,</span>
-            <span class="s2">&quot;uptime&quot;</span><span class="p">:</span> <span class="n">uptime</span><span class="p">,</span>
-            <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">"hostname"</span><span class="p">:</span> <span class="n">hostname</span><span class="p">,</span>
+            <span class="s2">"ip"</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
+            <span class="s2">"ios_version"</span><span class="p">:</span> <span class="n">ios_version</span><span class="p">,</span>
+            <span class="s2">"uptime"</span><span class="p">:</span> <span class="n">uptime</span><span class="p">,</span>
+            <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">"error"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
         <span class="p">})</span>
-        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2"> | OK | </span><span class="si">{</span><span class="n">ios_version</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">uptime</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2"> | OK | </span><span class="si">{</span><span class="n">ios_version</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">uptime</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="p">(</span><span class="n">NetmikoTimeoutException</span><span class="p">,</span> <span class="n">NetmikoAuthenticationException</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-            <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">),</span>
-            <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
-            <span class="s2">&quot;ios_version&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;uptime&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+            <span class="s2">"hostname"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hostname"</span><span class="p">,</span> <span class="n">host</span><span class="p">),</span>
+            <span class="s2">"ip"</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
+            <span class="s2">"ios_version"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"uptime"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"success"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"error"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
         <span class="p">})</span>
-        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2"> | FAIL | </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2"> | FAIL | </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="n">ts</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
-<span class="n">write_txt_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;facts_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.txt&quot;</span><span class="p">,</span> <span class="n">log_lines</span><span class="p">)</span>
-<span class="n">write_excel_report</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;facts_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.xlsx&quot;</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S"</span><span class="p">)</span>
+<span class="n">write_txt_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">"facts_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.txt"</span><span class="p">,</span> <span class="n">log_lines</span><span class="p">)</span>
+<span class="n">write_excel_report</span><span class="p">(</span><span class="sa">f</span><span class="s2">"facts_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.xlsx"</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done. Outputs created.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Done. Outputs created."</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="5-script-c-excel-inventory-run-any-command-per-device-export-report">5) Script C — Excel inventory → run ANY command per device → export report</h2>
@@ -2168,23 +2168,23 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">netmiko</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConnectHandler</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">netmiko.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">NetmikoTimeoutException</span><span class="p">,</span> <span class="n">NetmikoAuthenticationException</span>
 
-<span class="n">devices</span> <span class="o">=</span> <span class="n">load_devices_excel</span><span class="p">(</span><span class="s2">&quot;devices.xlsx&quot;</span><span class="p">)</span>
+<span class="n">devices</span> <span class="o">=</span> <span class="n">load_devices_excel</span><span class="p">(</span><span class="s2">"devices.xlsx"</span><span class="p">)</span>
 
-<span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Username: &quot;</span><span class="p">)</span>
-<span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s2">&quot;Password (hidden): &quot;</span><span class="p">)</span>
+<span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"Username: "</span><span class="p">)</span>
+<span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s2">"Password (hidden): "</span><span class="p">)</span>
 
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">log_lines</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">devices</span><span class="p">:</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;ip&quot;</span><span class="p">]</span>
-    <span class="n">cmd</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;command&quot;</span><span class="p">,</span> <span class="s2">&quot;show ip interface brief&quot;</span><span class="p">)</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">"ip"</span><span class="p">]</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"command"</span><span class="p">,</span> <span class="s2">"show ip interface brief"</span><span class="p">)</span>
 
     <span class="n">device</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;device_type&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;device_type&quot;</span><span class="p">,</span> <span class="s2">&quot;cisco_ios&quot;</span><span class="p">),</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
-        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
-        <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
+        <span class="s2">"device_type"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"device_type"</span><span class="p">,</span> <span class="s2">"cisco_ios"</span><span class="p">),</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
+        <span class="s2">"username"</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+        <span class="s2">"password"</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">try</span><span class="p">:</span>
@@ -2193,31 +2193,31 @@
         <span class="n">conn</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
 
         <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-            <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">),</span>
-            <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
-            <span class="s2">&quot;command&quot;</span><span class="p">:</span> <span class="n">cmd</span><span class="p">,</span>
-            <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="s2">&quot;lines&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()),</span>
-            <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">"hostname"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hostname"</span><span class="p">,</span> <span class="n">host</span><span class="p">),</span>
+            <span class="s2">"ip"</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
+            <span class="s2">"command"</span><span class="p">:</span> <span class="n">cmd</span><span class="p">,</span>
+            <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">"lines"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()),</span>
+            <span class="s2">"error"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
         <span class="p">})</span>
-        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2"> | OK | lines=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span><span class="si">}</span><span class="s2"> | cmd=</span><span class="si">{</span><span class="n">cmd</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2"> | OK | lines=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span><span class="si">}</span><span class="s2"> | cmd=</span><span class="si">{</span><span class="n">cmd</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="p">(</span><span class="n">NetmikoTimeoutException</span><span class="p">,</span> <span class="n">NetmikoAuthenticationException</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-            <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">),</span>
-            <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
-            <span class="s2">&quot;command&quot;</span><span class="p">:</span> <span class="n">cmd</span><span class="p">,</span>
-            <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="s2">&quot;lines&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+            <span class="s2">"hostname"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hostname"</span><span class="p">,</span> <span class="n">host</span><span class="p">),</span>
+            <span class="s2">"ip"</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
+            <span class="s2">"command"</span><span class="p">:</span> <span class="n">cmd</span><span class="p">,</span>
+            <span class="s2">"success"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"lines"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"error"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
         <span class="p">})</span>
-        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2"> | FAIL | </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2"> | FAIL | </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="n">ts</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
-<span class="n">write_txt_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;command_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.txt&quot;</span><span class="p">,</span> <span class="n">log_lines</span><span class="p">)</span>
-<span class="n">write_excel_report</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;command_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.xlsx&quot;</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S"</span><span class="p">)</span>
+<span class="n">write_txt_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">"command_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.txt"</span><span class="p">,</span> <span class="n">log_lines</span><span class="p">)</span>
+<span class="n">write_excel_report</span><span class="p">(</span><span class="sa">f</span><span class="s2">"command_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.xlsx"</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done. Outputs created.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Done. Outputs created."</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="6-script-d-palo-alto-retrieve-security-rule-names-via-api-secure-input">6) Script D — Palo Alto: retrieve security rule names via API (secure input)</h2>
@@ -2240,34 +2240,34 @@
 
 <span class="n">requests</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">urllib3</span><span class="o">.</span><span class="n">disable_warnings</span><span class="p">()</span>
 
-<span class="n">fw_host</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Firewall URL (ex: https://192.0.2.10): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-<span class="n">api_key</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s2">&quot;PAN-OS API key (hidden): &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="n">fw_host</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"Firewall URL (ex: https://192.0.2.10): "</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s2">"PAN-OS API key (hidden): "</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
-<span class="n">xpath_rules</span> <span class="o">=</span> <span class="s2">&quot;/config/devices/entry/vsys/entry[@name=&#39;vsys1&#39;]/rulebase/security/rules&quot;</span>
+<span class="n">xpath_rules</span> <span class="o">=</span> <span class="s2">"/config/devices/entry/vsys/entry[@name='vsys1']/rulebase/security/rules"</span>
 
 <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;config&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="n">api_key</span><span class="p">,</span>
-    <span class="s2">&quot;xpath&quot;</span><span class="p">:</span> <span class="n">xpath_rules</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"config"</span><span class="p">,</span>
+    <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"get"</span><span class="p">,</span>
+    <span class="s2">"key"</span><span class="p">:</span> <span class="n">api_key</span><span class="p">,</span>
+    <span class="s2">"xpath"</span><span class="p">:</span> <span class="n">xpath_rules</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fw_host</span><span class="si">}</span><span class="s2">/api/?</span><span class="si">{</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">params</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">fw_host</span><span class="si">}</span><span class="s2">/api/?</span><span class="si">{</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">params</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
 <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 <span class="n">resp</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
 
 <span class="n">root</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-<span class="n">rule_entries</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;.//entry&quot;</span><span class="p">)</span>
-<span class="n">rule_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;UNKNOWN&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">rule_entries</span><span class="p">]</span>
+<span class="n">rule_entries</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">".//entry"</span><span class="p">)</span>
+<span class="n">rule_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"UNKNOWN"</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">rule_entries</span><span class="p">]</span>
 
-<span class="n">rows</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;rule_name&quot;</span><span class="p">:</span> <span class="n">n</span><span class="p">}</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">rule_names</span><span class="p">]</span>
-<span class="n">log_lines</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;RULE | </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">rule_names</span><span class="p">]</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">"rule_name"</span><span class="p">:</span> <span class="n">n</span><span class="p">}</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">rule_names</span><span class="p">]</span>
+<span class="n">log_lines</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"RULE | </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">rule_names</span><span class="p">]</span>
 
-<span class="n">ts</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
-<span class="n">write_txt_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;palo_rules_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.txt&quot;</span><span class="p">,</span> <span class="n">log_lines</span><span class="p">)</span>
-<span class="n">write_excel_report</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;palo_rules_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.xlsx&quot;</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S"</span><span class="p">)</span>
+<span class="n">write_txt_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">"palo_rules_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.txt"</span><span class="p">,</span> <span class="n">log_lines</span><span class="p">)</span>
+<span class="n">write_excel_report</span><span class="p">(</span><span class="sa">f</span><span class="s2">"palo_rules_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.xlsx"</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done. Outputs created.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Done. Outputs created."</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="7-script-e-concurrency-get-facts-from-all-routers-fast-safe-structure">7) Script E — Concurrency: get facts from ALL routers fast (safe structure)</h2>
@@ -2286,32 +2286,32 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">netmiko</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConnectHandler</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">netmiko.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">NetmikoTimeoutException</span><span class="p">,</span> <span class="n">NetmikoAuthenticationException</span>
 
-<span class="n">devices</span> <span class="o">=</span> <span class="n">load_devices_csv</span><span class="p">(</span><span class="s2">&quot;devices.csv&quot;</span><span class="p">)</span>
+<span class="n">devices</span> <span class="o">=</span> <span class="n">load_devices_csv</span><span class="p">(</span><span class="s2">"devices.csv"</span><span class="p">)</span>
 
-<span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Username: &quot;</span><span class="p">)</span>
-<span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s2">&quot;Password (hidden): &quot;</span><span class="p">)</span>
+<span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"Username: "</span><span class="p">)</span>
+<span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s2">"Password (hidden): "</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">worker</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;ip&quot;</span><span class="p">]</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">"ip"</span><span class="p">]</span>
     <span class="n">device</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;device_type&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;device_type&quot;</span><span class="p">,</span> <span class="s2">&quot;cisco_ios&quot;</span><span class="p">),</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
-        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
-        <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
+        <span class="s2">"device_type"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"device_type"</span><span class="p">,</span> <span class="s2">"cisco_ios"</span><span class="p">),</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
+        <span class="s2">"username"</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+        <span class="s2">"password"</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">conn</span> <span class="o">=</span> <span class="n">ConnectHandler</span><span class="p">(</span><span class="o">**</span><span class="n">device</span><span class="p">)</span>
-        <span class="n">show_ver</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="s2">&quot;show version&quot;</span><span class="p">)</span>
+        <span class="n">show_ver</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="s2">"show version"</span><span class="p">)</span>
         <span class="n">conn</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
 
-        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;uptime is (.+)&quot;</span><span class="p">,</span> <span class="n">show_ver</span><span class="p">)</span>
-        <span class="n">uptime</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">m</span> <span class="k">else</span> <span class="s2">&quot;UNKNOWN&quot;</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">"uptime is (.+)"</span><span class="p">,</span> <span class="n">show_ver</span><span class="p">)</span>
+        <span class="n">uptime</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">m</span> <span class="k">else</span> <span class="s2">"UNKNOWN"</span>
 
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">),</span> <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span> <span class="s2">&quot;uptime&quot;</span><span class="p">:</span> <span class="n">uptime</span><span class="p">,</span> <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"hostname"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hostname"</span><span class="p">,</span> <span class="n">host</span><span class="p">),</span> <span class="s2">"ip"</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span> <span class="s2">"uptime"</span><span class="p">:</span> <span class="n">uptime</span><span class="p">,</span> <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"error"</span><span class="p">:</span> <span class="s2">""</span><span class="p">}</span>
 
     <span class="k">except</span> <span class="p">(</span><span class="n">NetmikoTimeoutException</span><span class="p">,</span> <span class="n">NetmikoAuthenticationException</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">),</span> <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span> <span class="s2">&quot;uptime&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"hostname"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hostname"</span><span class="p">,</span> <span class="n">host</span><span class="p">),</span> <span class="s2">"ip"</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span> <span class="s2">"uptime"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span> <span class="s2">"success"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">"error"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">max_workers</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Tune carefully</span>
@@ -2323,16 +2323,16 @@
 
 <span class="n">log_lines</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
-        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;ip&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> | OK | uptime=</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;uptime&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">"success"</span><span class="p">]:</span>
+        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">"ip"</span><span class="p">]</span><span class="si">}</span><span class="s1"> | OK | uptime=</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">"uptime"</span><span class="p">]</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;ip&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> | FAIL | </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;error&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">"ip"</span><span class="p">]</span><span class="si">}</span><span class="s1"> | FAIL | </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">"error"</span><span class="p">]</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 
-<span class="n">ts</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
-<span class="n">write_txt_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;uptime_concurrent_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.txt&quot;</span><span class="p">,</span> <span class="n">log_lines</span><span class="p">)</span>
-<span class="n">write_excel_report</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;uptime_concurrent_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.xlsx&quot;</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S"</span><span class="p">)</span>
+<span class="n">write_txt_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">"uptime_concurrent_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.txt"</span><span class="p">,</span> <span class="n">log_lines</span><span class="p">)</span>
+<span class="n">write_excel_report</span><span class="p">(</span><span class="sa">f</span><span class="s2">"uptime_concurrent_</span><span class="si">{</span><span class="n">ts</span><span class="si">}</span><span class="s2">.xlsx"</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done. Outputs created.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Done. Outputs created."</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="read-please-the-final-thoughts-congrats-if-you-arrived-untill-her-and-followed-from-the-start">Read please the final thoughts, congrats if you arrived untill her and followed from the start.</h2>
@@ -2394,7 +2394,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.top", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

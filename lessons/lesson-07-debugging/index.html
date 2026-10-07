@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1887,12 +1887,12 @@ Your job is to read.</p>
 <h2 id="the-5-most-common-errors">The 5 most common errors</h2>
 <h3 id="1-syntaxerror-python-cannot-parse-the-code">1) SyntaxError (Python cannot parse the code)</h3>
 <p>Example:
-<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">"hello"</span>
 </code></pre></div></p>
 <h3 id="2-indentationerror-blocks-not-aligned">2) IndentationError (blocks not aligned)</h3>
 <p>Example:
 <div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
 </code></pre></div></p>
 <h3 id="3-nameerror-variable-not-defined">3) NameError (variable not defined)</h3>
 <p>Example:
@@ -1900,12 +1900,12 @@ Your job is to read.</p>
 </code></pre></div></p>
 <h3 id="4-typeerror-wrong-type-for-an-operation">4) TypeError (wrong type for an operation)</h3>
 <p>Example:
-<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;10&quot;</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">"10"</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </code></pre></div></p>
 <h3 id="5-keyerror-dictionary-key-missing">5) KeyError (dictionary key missing)</h3>
 <p>Example:
-<div class="highlight"><pre><span></span><code><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"a"</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">"b"</span><span class="p">])</span>
 </code></pre></div></p>
 <hr />
 <h2 id="read-stack-traces-calmly">Read stack traces calmly</h2>
@@ -1938,15 +1938,15 @@ Your job is to read.</p>
 <hr />
 <h2 id="debug-tool-1-print">Debug tool #1: print</h2>
 <p>Yes, print is a debugging tool.</p>
-<div class="highlight"><pre><span></span><code><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;UP&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DEBUG status =&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">status</span> <span class="o">=</span> <span class="s2">"UP"</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"DEBUG status ="</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="exercise">Exercise</h2>
 <p>This code is broken. Fix it.</p>
-<div class="highlight"><pre><span></span><code><span class="n">iface</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;eth0&quot;</span><span class="p">,</span> <span class="s2">&quot;up&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">}</span>
-<span class="k">if</span> <span class="n">iface</span><span class="p">[</span><span class="s2">&quot;up&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">iface</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="s2">&quot;is UP&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">iface</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"eth0"</span><span class="p">,</span> <span class="s2">"up"</span><span class="p">:</span> <span class="s2">"True"</span><span class="p">}</span>
+<span class="k">if</span> <span class="n">iface</span><span class="p">[</span><span class="s2">"up"</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iface</span><span class="p">[</span><span class="s2">"name"</span><span class="p">],</span> <span class="s2">"is UP"</span><span class="p">)</span>
 </code></pre></div>
 <p>Hints:
 - <code>"True"</code> is text, not boolean
@@ -2009,7 +2009,7 @@ Your job is to read.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.top", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
