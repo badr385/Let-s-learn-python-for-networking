@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python for Network Engineers</title>
+<meta name="description" content="Learn Python by running it in your browser on realistic network data. 18 lessons, auto-checked exercises and a pretend Netmiko lab. Nothing to install.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<style>
+:root{
+  --bg:#f2f4f6; --plate:#e4e9ed; --panel:#ffffff; --ink:#13232d; --muted:#53636e; --line:#d3dce2;
+  --accent:#1559b7; --accent-ink:#ffffff; --accent-soft:#e3edfa;
+  --green:#1b8a4e; --green-soft:#e1f3e8; --amber:#b87800; --amber-soft:#fbf0d6; --red:#c0302f; --red-soft:#fbe6e5;
+  --code-bg:#0e1c25; --code-ink:#d3e4ec; --code-line:#223743; --code-muted:#7f97a4;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0a131a; --plate:#16252f; --panel:#111f29; --ink:#e3edf2; --muted:#94a7b3; --line:#243845;
+    --accent:#6aa7ff; --accent-ink:#06121f; --accent-soft:#16304f;
+    --green:#4cc27f; --green-soft:#12301f; --amber:#e6b030; --amber-soft:#35290b; --red:#ff7b78; --red-soft:#3a1717;
+    --code-bg:#08121a; --code-line:#1e323f;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0a131a; --plate:#16252f; --panel:#111f29; --ink:#e3edf2; --muted:#94a7b3; --line:#243845;
+  --accent:#6aa7ff; --accent-ink:#06121f; --accent-soft:#16304f;
+  --green:#4cc27f; --green-soft:#12301f; --amber:#e6b030; --amber-soft:#35290b; --red:#ff7b78; --red-soft:#3a1717;
+  --code-bg:#08121a; --code-line:#1e323f;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:120px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);-webkit-text-size-adjust:100%}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--panel);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--ink);font-weight:700;letter-spacing:-.01em;min-width:0}
+.brand small{font-weight:400;color:var(--muted);font-size:.85rem;white-space:nowrap}
+.brand b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spacer{flex:1}
+.menu{display:none;border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:6px 10px}
+.engine{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);white-space:nowrap}
+.engine i{width:10px;height:10px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 3px var(--amber-soft);animation:pulse 1.4s ease-in-out infinite}
+.engine.ready i{background:var(--green);box-shadow:0 0 0 3px var(--green-soft);animation:none}
+.engine.error i{background:var(--red);box-shadow:0 0 0 3px var(--red-soft);animation:none}
+@keyframes pulse{50%{opacity:.4}}
+
+/* faceplate: the progress bar is a row of switch ports */
+.plate{background:var(--plate);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:18px}
+.ports{display:flex;gap:14px;overflow-x:auto;padding:6px 2px 8px;flex:1;scrollbar-width:thin}
+.pgroup{display:flex;gap:4px;flex:none}
+.port{position:relative;width:28px;height:26px;border:2px solid var(--muted);border-radius:3px;background:var(--panel);display:grid;place-items:center;padding:0;font:600 10px/1 var(--mono);color:var(--muted);text-decoration:none}
+.port::before{content:"";position:absolute;top:-6px;right:1px;width:6px;height:6px;border-radius:50%;background:var(--line);border:1px solid var(--muted)}
+.port::after{content:"";position:absolute;bottom:-2px;left:50%;width:10px;height:4px;transform:translateX(-50%);background:var(--plate)}
+.port.done{border-color:var(--green);color:var(--green)}
+.port.done::before{background:var(--green);border-color:var(--green);box-shadow:0 0 5px var(--green)}
+.port.cur{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.port.cur::before{background:var(--amber);border-color:var(--amber)}
+.count{font:600 .85rem var(--mono);color:var(--muted);white-space:nowrap}
+
+/* layout */
+.shell{display:grid;grid-template-columns:272px minmax(0,1fr);max-width:1240px;margin:0 auto;align-items:start}
+aside{position:sticky;top:112px;max-height:calc(100vh - 112px);overflow:auto;padding:20px 16px 40px}
+aside h2{font-size:.85rem;margin:20px 0 6px;color:var(--muted);font-weight:600}
+aside h2:first-child{margin-top:0}
+aside a{display:flex;gap:10px;align-items:baseline;padding:6px 8px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:.95rem;line-height:1.35}
+aside a:hover{background:var(--plate)}
+aside a[aria-current="page"]{background:var(--accent-soft);font-weight:600}
+aside a .n{font:600 .8rem var(--mono);color:var(--muted);min-width:1.6em}
+aside a .st{margin-left:auto;font-size:.8rem;color:var(--green)}
+aside button.link{background:none;border:0;color:var(--muted);text-decoration:underline;padding:6px 8px;font-size:.85rem;margin-top:18px}
+main{padding:28px 24px 80px;min-width:0;outline:none}
+.page{max-width:760px}
+h1{font-size:2rem;line-height:1.2;letter-spacing:-.02em;margin:0 0 6px}
+.meta{color:var(--muted);font-size:.9rem;margin:0 0 24px}
+h2.sec{font-size:1.25rem;margin:34px 0 8px;letter-spacing:-.01em}
+p{margin:0 0 14px}
+ul.bl{margin:0 0 16px;padding-left:22px}
+ul.bl li{margin:4px 0}
+code{font:.9em var(--mono);background:var(--plate);padding:1px 5px;border-radius:4px}
+table{border-collapse:collapse;margin:0 0 18px;font-size:.95rem;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:6px 12px;text-align:left}
+th{background:var(--plate)}
+.note{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 6px 6px 0;margin:0 0 16px}
+.note.warn{border-color:var(--amber);background:var(--amber-soft)}
+.note b:first-child{margin-right:6px}
+
+/* code panels */
+.runbox,.codebox{border:1px solid var(--code-line);border-radius:8px;background:var(--code-bg);margin:0 0 18px;overflow:hidden}
+.runbar{display:flex;align-items:center;gap:8px;padding:6px 8px 6px 14px;border-bottom:1px solid var(--code-line);color:var(--code-muted);font:.8rem var(--mono)}
+.btn{border:1px solid transparent;border-radius:6px;padding:6px 14px;font-weight:600;font-size:.9rem;background:var(--accent);color:var(--accent-ink);min-height:34px}
+.btn:hover{filter:brightness(1.08)}
+.btn[disabled]{opacity:.55;cursor:default}
+.btn.ghost{background:transparent;color:var(--code-ink);border-color:var(--code-line)}
+.btn.ghost:hover{background:#ffffff14}
+.btn.stop{background:var(--red);color:#fff}
+.btn.good{background:var(--green);color:#fff}
+.codebox pre{margin:0;padding:12px 14px;overflow-x:auto;color:var(--code-ink);font:.9rem/1.55 var(--mono)}
+.codebox .cap{padding:6px 14px;border-bottom:1px solid var(--code-line);color:var(--amber);font:.8rem var(--mono)}
+.out{border-top:1px solid var(--code-line);padding:10px 14px;font:.9rem/1.55 var(--mono);color:var(--code-ink)}
+.out pre{margin:0;white-space:pre-wrap;word-break:break-word;font:inherit}
+.out .lbl{display:block;color:var(--code-muted);font-size:.78rem;margin-bottom:4px}
+.out .err{margin-top:8px;border-left:3px solid #ff7b78;padding-left:10px;color:#ffb1ae}
+.out .fix{margin-top:8px;color:#ffe3a3;font-family:var(--sans);font-size:.92rem}
+.out .none{color:var(--code-muted)}
+
+/* codemirror theme */
+.CodeMirror{height:auto;background:var(--code-bg);color:var(--code-ink);font:.9rem/1.55 var(--mono)}
+.CodeMirror-gutters{background:var(--code-bg);border-right:1px solid var(--code-line)}
+.CodeMirror-linenumber{color:#5d7685}
+.CodeMirror-cursor{border-left:2px solid #fff}
+.CodeMirror-selected{background:#2a4b60!important}
+.CodeMirror-focused .CodeMirror-selected{background:#2f5a75!important}
+.cm-s-default .cm-keyword{color:#7cc4ff}
+.cm-s-default .cm-string,.cm-s-default .cm-string-2{color:#a8e38d}
+.cm-s-default .cm-number{color:#ffcf6b}
+.cm-s-default .cm-comment{color:#6f8c9b;font-style:italic}
+.cm-s-default .cm-def{color:#f0adff}
+.cm-s-default .cm-builtin{color:#7ee6d4}
+.cm-s-default .cm-variable,.cm-s-default .cm-variable-2,.cm-s-default .cm-variable-3,.cm-s-default .cm-property{color:#d3e4ec}
+.cm-s-default .cm-operator,.cm-s-default .cm-meta{color:#ffa98a}
+.cm-s-default .cm-atom{color:#ffcf6b}
+textarea.fallback{width:100%;min-height:120px;background:var(--code-bg);color:var(--code-ink);border:0;padding:12px;font:.9rem/1.55 var(--mono);resize:vertical;display:block}
+
+/* exercise */
+.ex{border:2px solid var(--line);border-radius:10px;background:var(--panel);padding:18px;margin:36px 0 0}
+.ex.passed{border-color:var(--green)}
+.ex h2{margin:0 0 6px;font-size:1.25rem}
+.ex .runbox{margin:12px 0}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 4px}
+.actions .btn.alt{background:var(--panel);color:var(--ink);border-color:var(--line)}
+.actions .btn.alt:hover{background:var(--plate)}
+.tests{list-style:none;margin:12px 0 0;padding:0}
+.tests li{display:flex;gap:10px;padding:6px 0;border-top:1px solid var(--line)}
+.tests li:first-child{border-top:0}
+.tests .m{font-weight:700;width:1.3em;flex:none}
+.tests .pass .m{color:var(--green)}
+.tests .fail .m{color:var(--red)}
+.tests .why{display:block;color:var(--muted);font-size:.85rem}
+.banner{margin-top:12px;padding:12px 14px;border-radius:8px;background:var(--green-soft);border:1px solid var(--green);display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.banner.try{background:var(--amber-soft);border-color:var(--amber)}
+.reveal{margin-top:12px;font-size:.95rem}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:40px;flex-wrap:wrap}
+.pager a{padding:10px 16px;border:1px solid var(--line);border-radius:8px;background:var(--panel);text-decoration:none;color:var(--ink)}
+.pager a:hover{background:var(--plate)}
+.pager small{display:block;color:var(--muted)}
+
+/* home */
+.hero{padding:12px 0 8px}
+.hero h1{font-size:2.6rem;max-width:16ch}
+.hero p.lead{font-size:1.15rem;max-width:56ch;color:var(--muted)}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 30px}
+.cta a{text-decoration:none;display:inline-block;padding:10px 20px;border-radius:8px;font-weight:600}
+.cta a.p{background:var(--accent);color:var(--accent-ink)}
+.cta a.s{border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:0 0 28px}
+.part{border:1px solid var(--line);border-radius:8px;padding:14px;background:var(--panel)}
+.part h3{margin:0 0 6px;font-size:1rem}
+.part p{margin:0;color:var(--muted);font-size:.92rem}
+
+@media (max-width:900px){
+  .shell{display:block}
+  aside{display:none;position:fixed;inset:0 0 0 0;top:var(--topH,52px);z-index:15;max-height:none;background:var(--panel);padding:16px}
+  body.menu-open aside{display:block}
+  .menu{display:block}
+  .brand small{display:none}
+  main{padding:20px 16px 60px}
+  h1{font-size:1.6rem}
+  .hero h1{font-size:2rem}
+  .plate{padding:8px 16px}
+  .count{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a href="#main" class="sr">Skip to lesson</a>
+<header class="top">
+  <button class="menu" id="menu" aria-label="Open lesson list" aria-expanded="false">Lessons</button>
+  <a class="brand" href="#/"><b>Python for network engineers</b><small>interactive lab</small></a>
+  <span class="spacer"></span>
+  <span class="engine" id="engine" role="status" aria-live="polite"><i></i><span>Starting Python…</span></span>
+</header>
+<nav class="plate" aria-label="Course progress">
+  <div class="ports" id="ports"></div>
+  <span class="count" id="count"></span>
+</nav>
+<div class="shell">
+  <aside id="side" aria-label="Lessons"></aside>
+  <main id="main" tabindex="-1"></main>
+</div>
+
+<script id="lessons-data" type="application/json">{"lessons": [{"id": 1, "part": "Part 1: Fundamentals", "title": "Print and output", "minutes": 10, "body": "\nEvery script you write will talk to you through **print()**. Before you automate anything, you need to see what your script is doing.\n\n## Your first line\n\nPress **Run** (or Ctrl+Enter). Then change the text and run it again.\n\n~~~py\nprint(\"Hello, network!\")\n~~~\n\nText must be inside quotes. Single `'...'` or double `\"...\"` both work. Pick one style and stay with it.\n\n## Several values in one print\n\n`print` can take many values. By default it puts a space between them.\n\n~~~py\nprint(\"EDGE-01\", \"UP\")\nprint(\"EDGE-01\", \"UP\", sep=\" | \")\nprint(\"Checking...\", end=\" \")\nprint(\"done\")\n~~~\n\n- `sep` is what goes **between** values.\n- `end` is what goes **after** the last value. The default is a new line.\n\n## Special characters\n\n`\\n` means new line and `\\t` means tab. Handy for quick reports.\n\n~~~py\nprint(\"Line one\\nLine two\")\nprint(\"Host\\tStatus\")\n~~~\n\n> tip: When something does not work, add a print. Seeing the value is the fastest way to understand a bug.\n", "ex": {"prompt": "Print exactly two lines: `Router: EDGE-RBA-01` and then `Status: UP`.", "starter": "# Write two print() lines\n", "tests": [["Prints two lines in the right order", "out.strip().splitlines() == [\"Router: EDGE-RBA-01\", \"Status: UP\"]"]], "hint": "One print() per line. The text goes inside quotes.", "solution": "print(\"Router: EDGE-RBA-01\")\nprint(\"Status: UP\")\n"}}, {"id": 2, "part": "Part 1: Fundamentals", "title": "Variables and types", "minutes": 15, "body": "\nA **variable** is a name for a value. In network work, the values are things like hostnames, IP addresses, VLAN IDs and link states.\n\n~~~py\nhostname = \"EDGE-RBA-01\"\nvlan = 20\nlatency_ms = 12.5\nlink_up = True\n\nprint(hostname, vlan, latency_ms, link_up)\n~~~\n\n## The four basic types\n\n- `str` text: `\"EDGE-RBA-01\"`\n- `int` whole number: `20`\n- `float` decimal number: `12.5`\n- `bool` True or False: `True`\n\nAsk Python what type something is:\n\n~~~py\nprint(type(\"EDGE-01\"))\nprint(type(20))\nprint(type(12.5))\nprint(type(True))\n~~~\n\n## f-strings: put variables inside text\n\nPut an `f` before the quote and use `{name}` for each variable. This is the cleanest way to build messages.\n\n~~~py\nhostname = \"EDGE-RBA-01\"\nvlan = 20\nprint(f\"{hostname} carries VLAN {vlan}\")\n~~~\n\n## Converting types\n\nValues read from files or devices are usually text. Convert them before doing maths.\n\n~~~py\nvlan_text = \"20\"\nvlan = int(vlan_text)\nprint(vlan + 1)\n~~~\n\n> warn: `\"20\" + 1` fails because Python will not guess if you want text or a number. Convert first with `int()` or `str()`.\n", "ex": {"prompt": "Print `hostname`, `iface` and `status` on one line, separated by ` | `. Expected: `EDGE-RBA-01 | GigabitEthernet0/0 | UP`.", "starter": "hostname = \"EDGE-RBA-01\"\niface = \"GigabitEthernet0/0\"\nstatus = \"UP\"\n\n# print the three values with sep=\" | \"\n", "tests": [["Output is exactly: EDGE-RBA-01 | GigabitEthernet0/0 | UP", "out.strip() == \"EDGE-RBA-01 | GigabitEthernet0/0 | UP\""], ["Uses the variables, not retyped text", "\"hostname\" in src and \"iface\" in src.split(\"print\")[-1]"]], "hint": "print(hostname, iface, status, sep=' | ')", "solution": "hostname = \"EDGE-RBA-01\"\niface = \"GigabitEthernet0/0\"\nstatus = \"UP\"\n\nprint(hostname, iface, status, sep=\" | \")\n"}}, {"id": 3, "part": "Part 1: Fundamentals", "title": "Operators and logic", "minutes": 15, "body": "\nOperators let you calculate and compare. Comparisons give you a **bool** (True or False), which is what every decision in a script is built on.\n\n## Maths\n\n~~~py\nprint(10 + 5)\nprint(10 / 4)     # normal division\nprint(10 // 4)    # whole part only\nprint(10 % 4)     # remainder\nprint(2 ** 3)     # power\n~~~\n\n## Comparisons\n\n~~~py\nlatency = 35\nprint(latency < 50)\nprint(latency == 35)    # two equal signs: \"is it equal?\"\nprint(latency != 35)\n~~~\n\n> warn: `=` stores a value. `==` compares two values. Mixing them up is the most common beginner bug.\n\n## Combine conditions: and, or, not\n\n~~~py\nlatency = 35\nloss = 0.5\n\nprint(latency <= 50 and loss < 2)   # both must be true\nprint(latency > 200 or loss > 10)   # at least one\nprint(not (latency > 200))\n~~~\n\n| Operator | Meaning |\n| --- | --- |\n| `==` `!=` | equal, not equal |\n| `<` `<=` `>` `>=` | smaller, bigger |\n| `and` `or` `not` | combine booleans |\n", "ex": {"prompt": "A link is healthy when latency is at most 50 ms **and** loss is below 2 %. Store the result in a variable called `healthy` and print it.", "starter": "latency = 35\nloss = 0.5\n\n# healthy = ...\n# print(healthy)\n", "tests": [["healthy is True for these values", "healthy is True"], ["Prints True", "out.strip() == \"True\""], ["Uses <= and and", "\"<=\" in src and \"and\" in src"]], "hint": "healthy = latency <= 50 and loss < 2", "solution": "latency = 35\nloss = 0.5\n\nhealthy = latency <= 50 and loss < 2\nprint(healthy)\n"}}, {"id": 4, "part": "Part 1: Fundamentals", "title": "Conditions: if, elif, else", "minutes": 15, "body": "\nA condition lets your script choose what to do. Python uses a **colon** and **indentation** (4 spaces) to show which lines belong to the `if`.\n\n~~~py\nlink_up = False\n\nif link_up:\n    print(\"Link is up\")\nelse:\n    print(\"Check the link\")\n~~~\n\n## More than two paths\n\n`elif` means \"else if\". Python takes the first branch that is true and ignores the rest.\n\n~~~py\nlatency = 120\n\nif latency < 50:\n    print(\"Excellent\")\nelif latency < 150:\n    print(\"Acceptable\")\nelse:\n    print(\"Too slow\")\n~~~\n\n## Useful checks\n\n~~~py\nsite = \"Rabat\"\nprint(site == \"Rabat\")\nprint(\"Rab\" in site)          # is this text inside?\nprint(site.lower() == \"rabat\")\n~~~\n\n> tip: If Python says `IndentationError`, check that every line inside the `if` starts with exactly the same number of spaces.\n", "ex": {"prompt": "If `site` is `\"Rabat\"` **and** `link_up` is True, print `Rabat link OK`. Otherwise print `Check link`.", "starter": "site = \"Rabat\"\nlink_up = True\n\n# write the if / else\n", "tests": [["Prints: Rabat link OK", "out.strip() == \"Rabat link OK\""], ["Uses if and else", "\"if\" in src and \"else\" in src"]], "hint": "if site == \"Rabat\" and link_up:", "solution": "site = \"Rabat\"\nlink_up = True\n\nif site == \"Rabat\" and link_up:\n    print(\"Rabat link OK\")\nelse:\n    print(\"Check link\")\n"}}, {"id": 5, "part": "Part 1: Fundamentals", "title": "Loops", "minutes": 15, "body": "\nAutomation is mostly \"do this for every device\". That is a loop.\n\n## for: repeat for each item\n\n~~~py\ndevices = [\"EDGE-01\", \"CORE-01\", \"ACC-01\"]\n\nfor name in devices:\n    print(\"Checking\", name)\n~~~\n\n## range: repeat N times\n\n~~~py\nfor vlan in range(10, 14):\n    print(\"VLAN\", vlan)\n~~~\n\n`range(10, 14)` gives 10, 11, 12, 13. The end number is **not** included.\n\n## Filter inside a loop\n\n~~~py\nlinks = [(\"EDGE-01\", \"UP\"), (\"CORE-01\", \"DOWN\"), (\"ACC-01\", \"UP\")]\n\nfor name, status in links:\n    if status == \"DOWN\":\n        print(\"Problem on\", name)\n~~~\n\n## while: repeat until something changes\n\n~~~py\nretries = 3\nwhile retries > 0:\n    print(\"Trying...\", retries)\n    retries = retries - 1\n~~~\n\n> warn: A `while` loop must change something that makes it stop. If it never stops, the lab will stop it after 8 seconds and tell you.\n\n`break` leaves the loop early. `continue` skips to the next item.\n", "ex": {"prompt": "Print only the devices located in France (`\"FR\"`), one per line.", "starter": "devices = [\n    (\"PAR-EDGE-01\", \"FR\"),\n    (\"RBA-EDGE-01\", \"MA\"),\n    (\"LYO-EDGE-02\", \"FR\"),\n]\n\n# loop and print the FR hostnames\n", "tests": [["Prints PAR-EDGE-01 and LYO-EDGE-02 only", "out.strip().splitlines() == [\"PAR-EDGE-01\", \"LYO-EDGE-02\"]"], ["Uses a for loop", "\"for\" in src"]], "hint": "for name, country in devices:\n    if country == \"FR\":", "solution": "devices = [\n    (\"PAR-EDGE-01\", \"FR\"),\n    (\"RBA-EDGE-01\", \"MA\"),\n    (\"LYO-EDGE-02\", \"FR\"),\n]\n\nfor name, country in devices:\n    if country == \"FR\":\n        print(name)\n"}}, {"id": 6, "part": "Part 1: Fundamentals", "title": "Lists and dictionaries", "minutes": 20, "body": "\nNetwork data comes in two shapes: an ordered list of things, and labelled facts about one thing.\n\n## Lists\n\n~~~py\nvlans = [10, 20, 30]\nvlans.append(40)\nprint(vlans)\nprint(vlans[0])       # first item (we start at 0)\nprint(vlans[-1])      # last item\nprint(len(vlans))     # how many\nprint(20 in vlans)\n~~~\n\n## Dictionaries\n\nA dictionary stores **key: value** pairs. Perfect for a device or an interface table.\n\n~~~py\ninterfaces = {\n    \"GigabitEthernet0/0\": \"UP\",\n    \"GigabitEthernet0/1\": \"DOWN\",\n}\n\nprint(interfaces[\"GigabitEthernet0/1\"])\nprint(interfaces.get(\"GigabitEthernet0/9\"))   # missing key gives None, no crash\n\nfor name, status in interfaces.items():\n    print(name, \"is\", status)\n~~~\n\n> tip: `d[\"key\"]` crashes with KeyError if the key is missing. `d.get(\"key\")` is the safe version.\n\n## A list of dictionaries (you will see this everywhere)\n\n~~~py\ndevices = [\n    {\"hostname\": \"EDGE-01\", \"ip\": \"10.0.0.1\"},\n    {\"hostname\": \"CORE-01\", \"ip\": \"10.0.0.2\"},\n]\n\nfor d in devices:\n    print(d[\"hostname\"], d[\"ip\"])\n~~~\n", "ex": {"prompt": "Loop over `interfaces` and print each line as `<name> is <status>`. Also count how many are DOWN in a variable `down_count`. Do not change the dictionary.", "starter": "interfaces = {\n    \"GigabitEthernet0/0\": \"UP\",\n    \"GigabitEthernet0/1\": \"DOWN\",\n    \"GigabitEthernet0/2\": \"UP\",\n}\n\ndown_count = 0\n# loop here\n", "tests": [["Prints one line per interface", "out.strip().splitlines() == [\"GigabitEthernet0/0 is UP\", \"GigabitEthernet0/1 is DOWN\", \"GigabitEthernet0/2 is UP\"]"], ["down_count is 1", "down_count == 1"], ["Dictionary was not changed", "len(interfaces) == 3"]], "hint": "for name, status in interfaces.items():  then  if status == 'DOWN': down_count = down_count + 1", "solution": "interfaces = {\n    \"GigabitEthernet0/0\": \"UP\",\n    \"GigabitEthernet0/1\": \"DOWN\",\n    \"GigabitEthernet0/2\": \"UP\",\n}\n\ndown_count = 0\nfor name, status in interfaces.items():\n    print(name, \"is\", status)\n    if status == \"DOWN\":\n        down_count = down_count + 1\n"}}, {"id": 7, "part": "Part 1: Fundamentals", "title": "Debugging", "minutes": 15, "body": "\nEvery engineer gets errors. The skill is reading them. Run this broken script and read the red message from the **bottom up**.\n\n~~~py\ndevice = {\"name\": \"EDGE-01\", \"ip\": \"10.0.0.1\"}\nprint(device[\"hostname\"])\n~~~\n\nThe last line tells you **what** (`KeyError: 'hostname'`). The line above tells you **where** (line 2). Now fix it: the key is called `name`.\n\n## Common errors\n\n| Error | Usually means |\n| --- | --- |\n| `SyntaxError` | missing colon, quote or bracket |\n| `IndentationError` | uneven spaces |\n| `NameError` | typo, or variable not created yet |\n| `TypeError` | mixing text and numbers |\n| `KeyError` | dictionary key does not exist |\n| `IndexError` | list position does not exist |\n\n## Logic bugs: no error, wrong answer\n\nThese are harder because Python does not complain. Print the values and their types.\n\n~~~py\nup = \"True\"\nprint(up, type(up))\nprint(up == True)\n~~~\n\nThe text `\"True\"` is **not** the boolean `True`. The comparison is False, so your script silently takes the wrong path.\n\n> tip: Debug in three steps. Read the error. Print the suspicious value. Change one thing and run again.\n", "ex": {"prompt": "This script prints the wrong thing. Fix it so it prints `EDGE-01 is reachable`. The bug is in how the value is stored.", "starter": "device = {\"name\": \"EDGE-01\", \"up\": \"True\"}\n\nif device[\"up\"] == True:\n    print(device[\"name\"], \"is reachable\")\nelse:\n    print(device[\"name\"], \"is DOWN\")\n", "tests": [["Prints: EDGE-01 is reachable", "out.strip() == \"EDGE-01 is reachable\""], ["device['up'] is a real boolean", "device[\"up\"] is True"]], "hint": "Remove the quotes around True so it becomes a boolean.", "solution": "device = {\"name\": \"EDGE-01\", \"up\": True}\n\nif device[\"up\"] == True:\n    print(device[\"name\"], \"is reachable\")\nelse:\n    print(device[\"name\"], \"is DOWN\")\n"}}, {"id": 8, "part": "Part 2: Functions", "title": "Functions", "minutes": 15, "body": "\nA **function** is a named block of code you can reuse. Write the logic once, use it on 500 devices.\n\n~~~py\ndef greet(name):\n    return \"Hello \" + name\n\nprint(greet(\"Badr\"))\nprint(greet(\"network\"))\n~~~\n\n- `def` starts the function.\n- `name` is a **parameter** (the input).\n- `return` sends the answer back to the caller.\n\n## return is not print\n\n`print` shows something to a human. `return` hands a value to the code that called the function, so you can reuse it.\n\n~~~py\ndef is_big_vlan(vlan):\n    return vlan > 1000\n\nif is_big_vlan(2000):\n    print(\"extended range\")\n~~~\n\n## Default values\n\n~~~py\ndef check(host, port=22):\n    return host + \":\" + str(port)\n\nprint(check(\"EDGE-01\"))\nprint(check(\"EDGE-01\", 830))\n~~~\n\n> tip: Name a function with a verb: `is_up`, `count_down`, `build_report`. You will understand your own script in six months.\n", "ex": {"prompt": "Write `is_up(status)` that returns True when the status is `\"up\"` in **any case** (`UP`, `Up`, `up`), otherwise False.", "starter": "def is_up(status):\n    # return True or False\n    pass\n", "tests": [["is_up(\"UP\") is True", "is_up(\"UP\") is True"], ["is_up(\"up\") is True", "is_up(\"up\") is True"], ["is_up(\"down\") is False", "is_up(\"down\") is False"]], "hint": "Convert to lowercase first: status.lower() == 'up'", "solution": "def is_up(status):\n    return status.lower() == \"up\"\n"}}, {"id": 9, "part": "Part 2: Functions", "title": "Your first network functions", "minutes": 15, "body": "\nSmall functions that answer one question are the building blocks of every automation script.\n\n## Clean text before comparing\n\nDevice output is messy: spaces, mixed case. Clean it first.\n\n~~~py\nraw = \"  GigabitEthernet0/0  \"\nprint(raw.strip())\nprint(raw.strip().lower())\nprint(\"Gi0/0\".startswith(\"Gi\"))\nprint(\"a,b,c\".split(\",\"))\n~~~\n\n## A validator\n\nA VLAN ID must be a whole number between 1 and 4094. A function can check that for you:\n\n~~~py\ndef is_valid_ip_octet(n):\n    return 0 <= n <= 255\n\nprint(is_valid_ip_octet(10))\nprint(is_valid_ip_octet(300))\n~~~\n\n> tip: `0 <= n <= 255` is a chained comparison. It reads like normal maths and is valid Python.\n\n## A function can call another function\n\n~~~py\ndef clean(name):\n    return name.strip().upper()\n\ndef is_edge(name):\n    return clean(name).startswith(\"EDGE\")\n\nprint(is_edge(\"  edge-rba-01 \"))\n~~~\n", "ex": {"prompt": "Write `is_vlan_valid(vlan)` that returns True if `vlan` is between 1 and 4094 (both included).", "starter": "def is_vlan_valid(vlan):\n    pass\n", "tests": [["1 is valid", "is_vlan_valid(1) is True"], ["4094 is valid", "is_vlan_valid(4094) is True"], ["0 is not valid", "is_vlan_valid(0) is False"], ["4095 is not valid", "is_vlan_valid(4095) is False"]], "hint": "return 1 <= vlan <= 4094", "solution": "def is_vlan_valid(vlan):\n    return 1 <= vlan <= 4094\n"}}, {"id": 10, "part": "Part 2: Functions", "title": "Controlling output", "minutes": 15, "body": "\nGood scripts print reports people can read at 3 a.m. Format your output on purpose.\n\n## Align columns\n\nInside an f-string, `{value:<15}` means \"left-aligned in 15 characters\".\n\n~~~py\nrows = [(\"EDGE-01\", \"10.0.0.1\", \"UP\"), (\"CORE-01\", \"10.0.0.2\", \"DOWN\")]\n\nprint(f\"{'Host':<10}{'IP':<12}{'Status'}\")\nfor host, ip, status in rows:\n    print(f\"{host:<10}{ip:<12}{status}\")\n~~~\n\n## Build text with join\n\n~~~py\nhosts = [\"EDGE-01\", \"CORE-01\", \"ACC-01\"]\nprint(\", \".join(hosts))\nprint(\"-\" * 20)\n~~~\n\n## Return the text, print it outside\n\nA function that **returns** text can be tested, reused, or written to a file. A function that only prints cannot.\n\n~~~py\ndef format_line(host, status):\n    return f\"{host} -> {status}\"\n\nline = format_line(\"EDGE-01\", \"UP\")\nprint(line)\nprint(len(line))\n~~~\n", "ex": {"prompt": "Write `format_alert(host, message)` that **returns** `ALERT | <host> | <message>`.", "starter": "def format_alert(host, message):\n    pass\n", "tests": [["format_alert(\"EDGE-01\", \"link down\") == \"ALERT | EDGE-01 | link down\"", "format_alert(\"EDGE-01\", \"link down\") == \"ALERT | EDGE-01 | link down\""], ["format_alert(\"CORE-01\", \"high CPU\") == \"ALERT | CORE-01 | high CPU\"", "format_alert(\"CORE-01\", \"high CPU\") == \"ALERT | CORE-01 | high CPU\""]], "hint": "return f\"ALERT | {host} | {message}\"", "solution": "def format_alert(host, message):\n    return f\"ALERT | {host} | {message}\"\n"}}, {"id": 11, "part": "Part 2: Functions", "title": "Functions with collections", "minutes": 20, "body": "\nMost real functions receive a **list** and return a **list**, like \"give me the devices that are down\".\n\n~~~py\ndef hostnames(devices):\n    result = []\n    for d in devices:\n        result.append(d[\"hostname\"])\n    return result\n\ndevices = [\n    {\"hostname\": \"EDGE-01\", \"status\": \"up\"},\n    {\"hostname\": \"CORE-01\", \"status\": \"down\"},\n]\nprint(hostnames(devices))\n~~~\n\nThe pattern is always the same:\n\n- start with an empty list\n- loop over the input\n- `append` what you want to keep\n- `return` the list\n\n## The short version: list comprehension\n\nOnce the pattern feels natural, you can write it on one line.\n\n~~~py\ndevices = [\n    {\"hostname\": \"EDGE-01\", \"status\": \"up\"},\n    {\"hostname\": \"CORE-01\", \"status\": \"down\"},\n]\ndown = [d[\"hostname\"] for d in devices if d[\"status\"] == \"down\"]\nprint(down)\n~~~\n\n> tip: Learn the loop version first. Use the one-liner only when you can read it without effort.\n", "ex": {"prompt": "Write `down_hosts(devices)` that returns a **list of hostnames** whose `status` is `\"down\"`.", "starter": "def down_hosts(devices):\n    pass\n", "tests": [["Finds the down devices in order", "down_hosts([{\"hostname\": \"A\", \"status\": \"down\"}, {\"hostname\": \"B\", \"status\": \"up\"}, {\"hostname\": \"C\", \"status\": \"down\"}]) == [\"A\", \"C\"]"], ["Empty list when all are up", "down_hosts([{\"hostname\": \"A\", \"status\": \"up\"}]) == []"]], "hint": "result = []  then loop, if d['status'] == 'down': result.append(d['hostname'])  then return result", "solution": "def down_hosts(devices):\n    result = []\n    for d in devices:\n        if d[\"status\"] == \"down\":\n            result.append(d[\"hostname\"])\n    return result\n"}}, {"id": 12, "part": "Part 3: Networking", "title": "Network data in Python", "minutes": 20, "body": "\nBefore you connect to a device, learn how network information is **stored**. Almost everything is one of these: a dictionary, a list of dictionaries, a CSV file or JSON.\n\n## One device\n\n~~~py\ndevice = {\n    \"hostname\": \"EDGE-RBA-01\",\n    \"ip\": \"10.0.0.1\",\n    \"role\": \"edge\",\n}\nprint(device[\"hostname\"], device[\"ip\"])\n~~~\n\n## An inventory from a CSV\n\nIn real life you open a file with `open(\"inventory.csv\")`. In the lab we use a text value that behaves like a file.\n\n~~~py\nimport csv\nimport io\n\ntext = \"\"\"hostname,ip,role\nEDGE-RBA-01,10.0.0.1,edge\nCORE-CAS-01,10.0.0.2,core\nACC-FES-01,10.0.0.3,access\n\"\"\"\n\ninventory = list(csv.DictReader(io.StringIO(text)))\nfor d in inventory:\n    print(d[\"hostname\"], d[\"role\"])\n~~~\n\nEach row became a dictionary. The first line (the header) gave the keys.\n\n## JSON: the language of APIs\n\n~~~py\nimport json\n\ndevice = {\"hostname\": \"EDGE-RBA-01\", \"interfaces\": [\"Gi0/0\", \"Gi0/1\"]}\ntext = json.dumps(device, indent=2)\nprint(text)\n\nback = json.loads(text)\nprint(back[\"interfaces\"][0])\n~~~\n\n> tip: Keep one column name for the same thing everywhere. If your CSV says `platform` but your code expects `device_type`, the script breaks. Pick `device_type` and stay with it.\n", "ex": {"prompt": "Write `summary(device)` that **returns** `<hostname> | <ip> | <role>` for a device dictionary.", "starter": "def summary(device):\n    pass\n", "tests": [["Builds the summary line", "summary({\"hostname\": \"RBA-EDGE-01\", \"ip\": \"10.0.0.1\", \"role\": \"edge\"}) == \"RBA-EDGE-01 | 10.0.0.1 | edge\""], ["Works for another device", "summary({\"hostname\": \"CAS-CORE-01\", \"ip\": \"10.0.0.2\", \"role\": \"core\"}) == \"CAS-CORE-01 | 10.0.0.2 | core\""]], "hint": "return f\"{device['hostname']} | {device['ip']} | {device['role']}\"", "solution": "def summary(device):\n    return f\"{device['hostname']} | {device['ip']} | {device['role']}\"\n"}}, {"id": 13, "part": "Part 3: Networking", "title": "Real use case: read command output", "minutes": 20, "body": "\nA device answers a command with **text**. Your job is to turn that text into answers. The tools are the ones you already know: `splitlines()`, `split()`, `in` and loops.\n\n~~~py\noutput = \"\"\"Interface              IP-Address      OK? Method Status                Protocol\nGigabitEthernet0/0     10.0.1.1        YES manual up                    up\nGigabitEthernet0/1     unassigned      YES manual down                  down\nGigabitEthernet0/2     10.0.2.1        YES manual up                    up\"\"\"\n\nlines = output.splitlines()\nprint(\"Total lines:\", len(lines))\n\nfor line in lines[1:]:          # skip the header\n    parts = line.split()\n    print(parts[0], \"->\", parts[-1])\n~~~\n\n- `splitlines()` cuts the text into one string per line.\n- `lines[1:]` means \"from the second line to the end\".\n- `split()` cuts a line on spaces. `parts[0]` is the interface, `parts[-1]` is the protocol state.\n\n## Count with a keyword\n\n~~~py\noutput = \"Gi0/0 up\\nGi0/1 down\\nGi0/2 down\"\ncount = 0\nfor line in output.splitlines():\n    if \"down\" in line:\n        count = count + 1\nprint(count)\n~~~\n\n> tip: Real output changes between vendors and versions. Parse the least you need, then test on a real sample.\n", "ex": {"prompt": "From `output`, print every interface that is down as `DOWN | <interface name>`. Skip the header line.", "starter": "output = \"\"\"Interface              IP-Address      OK? Method Status                Protocol\nGigabitEthernet0/0     10.0.1.1        YES manual up                    up\nGigabitEthernet0/1     unassigned      YES manual down                  down\nGigabitEthernet0/2     10.0.2.1        YES manual up                    up\nGigabitEthernet0/3     unassigned      YES manual administratively down down\"\"\"\n\n# loop over the lines and print the down interfaces\n", "tests": [["Finds both down interfaces", "out.strip().splitlines() == [\"DOWN | GigabitEthernet0/1\", \"DOWN | GigabitEthernet0/3\"]"]], "hint": "for line in output.splitlines()[1:]:  if 'down' in line:  print('DOWN |', line.split()[0])", "solution": "output = \"\"\"Interface              IP-Address      OK? Method Status                Protocol\nGigabitEthernet0/0     10.0.1.1        YES manual up                    up\nGigabitEthernet0/1     unassigned      YES manual down                  down\nGigabitEthernet0/2     10.0.2.1        YES manual up                    up\nGigabitEthernet0/3     unassigned      YES manual administratively down down\"\"\"\n\nfor line in output.splitlines()[1:]:\n    if \"down\" in line:\n        print(\"DOWN |\", line.split()[0])\n"}}, {"id": 14, "part": "Part 3: Networking", "title": "Connect to a device with Netmiko", "minutes": 25, "body": "\n**Netmiko** is the Python library that logs into a device over SSH and runs commands, the same way you do in a terminal.\n\n> tip: A browser cannot open SSH connections. This lab includes a **pretend Netmiko** with three fake devices (10.0.0.1, 10.0.0.2, 10.0.0.3). The code you write here is the same code you will run on real gear.\n\n## The real script on your laptop\n\n~~~py norun\nfrom getpass import getpass\nfrom netmiko import ConnectHandler\n\ndevice = {\n    \"device_type\": \"cisco_ios\",\n    \"host\": \"10.0.0.1\",\n    \"username\": input(\"Username: \"),\n    \"password\": getpass(\"Password: \"),\n}\n\nwith ConnectHandler(**device) as conn:\n    print(conn.send_command(\"show version\"))\n~~~\n\n## The same script in the lab\n\nThe lab already loaded the credentials into environment variables, like a real shell would.\n\n~~~py\nimport os\nfrom netmiko import ConnectHandler\n\ndevice = {\n    \"device_type\": \"cisco_ios\",\n    \"host\": \"10.0.0.1\",\n    \"username\": os.environ[\"NET_USER\"],\n    \"password\": os.environ[\"NET_PASS\"],\n}\n\nwith ConnectHandler(**device) as conn:\n    print(conn.find_prompt())\n    print(conn.send_command(\"show ip interface brief\"))\n~~~\n\n- `ConnectHandler(**device)` opens the SSH session.\n- `with ... as conn` closes it for you at the end, even if something fails.\n- `send_command(\"...\")` runs a show command and returns the output as text.\n\n## When it fails\n\nReal networks fail all the time. Catch the errors you expect.\n\n~~~py\nimport os\nfrom netmiko import ConnectHandler\nfrom netmiko.exceptions import NetmikoTimeoutException\n\ndevice = {\n    \"device_type\": \"cisco_ios\",\n    \"host\": \"10.0.0.9\",            # no device here\n    \"username\": os.environ[\"NET_USER\"],\n    \"password\": os.environ[\"NET_PASS\"],\n}\n\ntry:\n    with ConnectHandler(**device) as conn:\n        print(conn.send_command(\"show version\"))\nexcept NetmikoTimeoutException:\n    print(\"Cannot reach\", device[\"host\"])\n~~~\n\nTry changing the password to `\"wrong\"` and see what happens.\n", "ex": {"prompt": "Connect to `10.0.0.1`, run `show ip interface brief`, and print **how many lines contain the word `down`**.", "starter": "import os\nfrom netmiko import ConnectHandler\n\ndevice = {\n    \"device_type\": \"cisco_ios\",\n    \"host\": \"10.0.0.1\",\n    \"username\": os.environ[\"NET_USER\"],\n    \"password\": os.environ[\"NET_PASS\"],\n}\n\n# connect, send the command, count the \"down\" lines, print the number\n", "tests": [["Prints 1 (only Gi0/1 is down)", "out.strip() == \"1\""], ["Uses ConnectHandler", "\"ConnectHandler(\" in src"], ["Closes the session (with or disconnect)", "\"with \" in src or \"disconnect\" in src"]], "hint": "with ConnectHandler(**device) as conn:  output = conn.send_command('show ip interface brief')  then loop over output.splitlines() and count", "solution": "import os\nfrom netmiko import ConnectHandler\n\ndevice = {\n    \"device_type\": \"cisco_ios\",\n    \"host\": \"10.0.0.1\",\n    \"username\": os.environ[\"NET_USER\"],\n    \"password\": os.environ[\"NET_PASS\"],\n}\n\nwith ConnectHandler(**device) as conn:\n    output = conn.send_command(\"show ip interface brief\")\n\ncount = 0\nfor line in output.splitlines():\n    if \"down\" in line:\n        count = count + 1\nprint(count)\n"}}, {"id": 15, "part": "Part 3: Networking", "title": "Run on many devices", "minutes": 25, "body": "\nOne device is a demo. Ten devices is a job. The rule for many devices: **one failure must never stop the others**.\n\n## A function for one device\n\n~~~py\nimport os\nfrom netmiko import ConnectHandler\nfrom netmiko.exceptions import NetmikoTimeoutException\n\ndef get_hostname(ip):\n    device = {\n        \"device_type\": \"cisco_ios\",\n        \"host\": ip,\n        \"username\": os.environ[\"NET_USER\"],\n        \"password\": os.environ[\"NET_PASS\"],\n    }\n    try:\n        with ConnectHandler(**device) as conn:\n            return conn.find_prompt()\n    except NetmikoTimeoutException:\n        return None\n\nfor ip in [\"10.0.0.1\", \"10.0.0.2\", \"10.0.0.9\"]:\n    print(ip, get_hostname(ip))\n~~~\n\nThe function returns `None` when the device is unreachable, and the loop keeps going.\n\n> warn: Do not catch only one exception type and hope. A real script should also have a final `except Exception as e:` that prints what happened, so one odd device cannot crash the whole run.\n\n## Concurrency: do many at once\n\nConnecting to devices one by one is slow because most of the time is **waiting**. Threads let you wait for many devices at the same time. This is the real code:\n\n~~~py norun\nfrom concurrent.futures import ThreadPoolExecutor\n\nwith ThreadPoolExecutor(max_workers=10) as pool:\n    results = list(pool.map(get_hostname, ips))\n~~~\n\nBrowsers cannot run Python threads, so the lab gives you `parallel_map`, which has the same shape but runs one after the other:\n\n~~~py\nfrom netlab import parallel_map\n\ndef double(n):\n    return n * 2\n\nprint(parallel_map(double, [1, 2, 3]))\n~~~\n\n> tip: Keep `max_workers` small (5 to 20). Hitting 200 devices at once can overload your AAA server or get your script blocked.\n", "ex": {"prompt": "Write `count_lines(device)` that connects, runs `show ip interface brief`, and returns `(host, number_of_lines)`. If the device does not answer, return `(host, None)`. Then use `parallel_map` on `devices` and print each result as `<host>: <n> lines` or `<host>: FAIL`.", "starter": "import os\nfrom netmiko import ConnectHandler\nfrom netmiko.exceptions import NetmikoTimeoutException\n\ndef make_device(ip):\n    return {\n        \"device_type\": \"cisco_ios\",\n        \"host\": ip,\n        \"username\": os.environ[\"NET_USER\"],\n        \"password\": os.environ[\"NET_PASS\"],\n    }\n\nfrom netlab import parallel_map\n\ndevices = [make_device(ip) for ip in [\"10.0.0.1\", \"10.0.0.2\", \"10.0.0.3\", \"10.0.0.9\"]]\n\ndef count_lines(device):\n    pass\n\n# results = parallel_map(count_lines, devices)\n# then print one line per result\n", "tests": [["Results are correct, with None for the unreachable one", "results == [(\"10.0.0.1\", 5), (\"10.0.0.2\", 4), (\"10.0.0.3\", 6), (\"10.0.0.9\", None)]"], ["Output lines are printed in the right format", "out.strip().splitlines() == [\"10.0.0.1: 5 lines\", \"10.0.0.2: 4 lines\", \"10.0.0.3: 6 lines\", \"10.0.0.9: FAIL\"]"]], "hint": "try: with ConnectHandler(**device) as conn: ... return (device['host'], len(output.splitlines()))  except NetmikoTimeoutException: return (device['host'], None)", "solution": "import os\nfrom netmiko import ConnectHandler\nfrom netmiko.exceptions import NetmikoTimeoutException\n\ndef make_device(ip):\n    return {\n        \"device_type\": \"cisco_ios\",\n        \"host\": ip,\n        \"username\": os.environ[\"NET_USER\"],\n        \"password\": os.environ[\"NET_PASS\"],\n    }\n\nfrom netlab import parallel_map\n\ndevices = [make_device(ip) for ip in [\"10.0.0.1\", \"10.0.0.2\", \"10.0.0.3\", \"10.0.0.9\"]]\n\ndef count_lines(device):\n    try:\n        with ConnectHandler(**device) as conn:\n            output = conn.send_command(\"show ip interface brief\")\n        return (device[\"host\"], len(output.splitlines()))\n    except NetmikoTimeoutException:\n        return (device[\"host\"], None)\n\nresults = parallel_map(count_lines, devices)\nfor host, n in results:\n    if n is None:\n        print(f\"{host}: FAIL\")\n    else:\n        print(f\"{host}: {n} lines\")\n"}}, {"id": 16, "part": "Part 3: Networking", "title": "Push configuration safely", "minutes": 25, "body": "\nReading from devices is safe. **Changing** them is where careers are made or lost. Follow the same routine every time:\n\n- **Backup** the current config (or at least the lines you will change).\n- **Test on one device** first, then a small group, then everyone.\n- **Verify** after the change with a show command.\n- **Log** what worked and what failed.\n\n## Push a change and check it\n\n~~~py\nimport os\nfrom netmiko import ConnectHandler\n\ndevice = {\n    \"device_type\": \"cisco_ios\",\n    \"host\": \"10.0.0.1\",\n    \"username\": os.environ[\"NET_USER\"],\n    \"password\": os.environ[\"NET_PASS\"],\n}\n\nwith ConnectHandler(**device) as conn:\n    before = conn.send_command(\"show running-config interface GigabitEthernet0/1\")\n    commands = [\n        \"interface GigabitEthernet0/1\",\n        \"description Uplink to CORE-CAS-01\",\n    ]\n    print(conn.send_config_set(commands))\n    after = conn.send_command(\"show running-config interface GigabitEthernet0/1\")\n\nprint(\"--- before ---\")\nprint(before)\nprint(\"--- after ---\")\nprint(after)\n~~~\n\n`send_config_set` enters configuration mode, sends each line, and leaves. It returns what the device printed, **including error messages** such as `% Invalid input`. Read that text.\n\n> warn: A config push that does not raise a Python error is not proof that it worked. Always verify with a show command.\n\n## Build the commands with variables\n\n~~~py\niface = \"GigabitEthernet0/1\"\nhostname = \"EDGE-RBA-01\"\n\ncommands = [\n    f\"interface {iface}\",\n    f\"description {hostname} uplink\",\n]\nprint(commands)\n~~~\n\n## Count successes and failures\n\nEnd every run with a summary: `OK=3 FAIL=1`. It is the first thing you look at the next morning.\n", "ex": {"prompt": "Write `push_description(device, iface)` that applies a description to the interface and returns True, or returns False if the device is unreachable. The description must be `<hostname> uplink`, where the hostname comes from `conn.find_prompt()` without the `#`. Print `OK: <ip>` or `FAIL: <ip>` per device and finish with `OK=<n> FAIL=<n>`.", "starter": "import os\nfrom netmiko import ConnectHandler\nfrom netmiko.exceptions import NetmikoTimeoutException\n\ndef make_device(ip):\n    return {\n        \"device_type\": \"cisco_ios\",\n        \"host\": ip,\n        \"username\": os.environ[\"NET_USER\"],\n        \"password\": os.environ[\"NET_PASS\"],\n    }\n\ndevices = [make_device(ip) for ip in [\"10.0.0.1\", \"10.0.0.2\", \"10.0.0.3\", \"10.0.0.9\"]]\niface = \"GigabitEthernet0/1\"\n\ndef push_description(device, iface):\n    pass\n\nok = 0\nfail = 0\n# loop over devices, call the function, print OK / FAIL, count\n# finish with: print(f\"OK={ok} FAIL={fail}\")\n", "tests": [["Output lines are correct", "out.strip().splitlines() == [\"OK: 10.0.0.1\", \"OK: 10.0.0.2\", \"OK: 10.0.0.3\", \"FAIL: 10.0.0.9\", \"OK=3 FAIL=1\"]"], ["EDGE-RBA-01 has its description", "\"description EDGE-RBA-01 uplink\" in ConnectHandler(device_type=\"cisco_ios\", host=\"10.0.0.1\", username=\"admin\", password=\"lab123\").send_command(\"show running-config interface GigabitEthernet0/1\")"], ["ACC-FES-01 has its description", "\"description ACC-FES-01 uplink\" in ConnectHandler(device_type=\"cisco_ios\", host=\"10.0.0.3\", username=\"admin\", password=\"lab123\").send_command(\"show running-config interface GigabitEthernet0/1\")"]], "hint": "hostname = conn.find_prompt().strip('#')  then  conn.send_config_set([f'interface {iface}', f'description {hostname} uplink'])", "solution": "import os\nfrom netmiko import ConnectHandler\nfrom netmiko.exceptions import NetmikoTimeoutException\n\ndef make_device(ip):\n    return {\n        \"device_type\": \"cisco_ios\",\n        \"host\": ip,\n        \"username\": os.environ[\"NET_USER\"],\n        \"password\": os.environ[\"NET_PASS\"],\n    }\n\ndevices = [make_device(ip) for ip in [\"10.0.0.1\", \"10.0.0.2\", \"10.0.0.3\", \"10.0.0.9\"]]\niface = \"GigabitEthernet0/1\"\n\ndef push_description(device, iface):\n    try:\n        with ConnectHandler(**device) as conn:\n            hostname = conn.find_prompt().strip(\"#\")\n            conn.send_config_set([\n                f\"interface {iface}\",\n                f\"description {hostname} uplink\",\n            ])\n        return True\n    except NetmikoTimeoutException:\n        return False\n\nok = 0\nfail = 0\nfor device in devices:\n    if push_description(device, iface):\n        print(\"OK:\", device[\"host\"])\n        ok = ok + 1\n    else:\n        print(\"FAIL:\", device[\"host\"])\n        fail = fail + 1\n\nprint(f\"OK={ok} FAIL={fail}\")\n"}}, {"id": 17, "part": "Final part", "title": "The automation mindset", "minutes": 15, "body": "\nWriting the script is the easy part. Running it safely every week is the real skill.\n\n## Never put passwords in the script\n\nIf a password is in your code, it ends up in Git, in screenshots and in chat messages. Two safe habits:\n\n- Ask for it when the script starts: `getpass()` (hides what you type).\n- Read it from an environment variable: `os.environ.get(\"NET_PASS\")`.\n\n~~~py\nimport os\n\nuser = os.environ.get(\"NET_USER\")\npassword = os.environ.get(\"NET_PASS\")\n\nif user and password:\n    print(\"Credentials loaded for\", user)\nelse:\n    print(\"Missing credentials\")\n~~~\n\nNotice that the script **never prints the password**, even in a debug message.\n\n## A script template you can reuse\n\nPut the work in functions and start it from `main()`. The last two lines mean \"run main only when this file is started directly\".\n\n~~~py\ndef check_device(name):\n    return f\"{name}: checked\"\n\ndef main():\n    print(\"Script started\")\n    for name in [\"EDGE-01\", \"CORE-01\"]:\n        print(check_device(name))\n    print(\"Script finished\")\n\nif __name__ == \"__main__\":\n    main()\n~~~\n\n## Habits of people who automate well\n\n- Read-only first. Prove the script on `show` commands before it ever configures anything.\n- One small step at a time. Test on a lab device, then one production device.\n- Print what you do. Future you will need the log.\n- Keep scripts and inventories in Git so you can see what changed.\n- Say \"I do not know yet\" and test it.\n", "ex": {"prompt": "Read `NET_USER` and `NET_PASS` from the environment. If both exist print `Credentials loaded for <user>`, otherwise print `Missing credentials`. Never print the password.", "starter": "import os\n\nuser = os.environ.get(\"NET_USER\")\npassword = os.environ.get(\"NET_PASS\")\n\n# print the right message\n", "tests": [["Prints: Credentials loaded for admin", "out.strip() == \"Credentials loaded for admin\""], ["Does not leak the password", "\"lab123\" not in out"], ["Reads from the environment, not hard-coded", "\"environ\" in src"]], "hint": "if user and password:  print('Credentials loaded for', user)  else: print('Missing credentials')", "solution": "import os\n\nuser = os.environ.get(\"NET_USER\")\npassword = os.environ.get(\"NET_PASS\")\n\nif user and password:\n    print(\"Credentials loaded for\", user)\nelse:\n    print(\"Missing credentials\")\n"}}, {"id": 18, "part": "Final part", "title": "Capstone and next steps", "minutes": 30, "body": "\nTime to put everything together in one script: a small **interface audit** across the lab. It uses variables, loops, functions, dictionaries, error handling and Netmiko.\n\n## The job\n\nFor each device print how many lines of `show ip interface brief` contain `down`. If a device cannot be reached, print `UNREACHABLE`. At the end print the total.\n\nExpected shape of the output:\n\n~~~text\n10.0.0.1: 1 down\n10.0.0.2: 2 down\n10.0.0.3: 0 down\n10.0.0.9: UNREACHABLE\nTOTAL down: 3\n~~~\n\nUse what you built in lessons 14 to 16. If you get stuck, press **Hint** before **Solution**.\n\n## Where to go next\n\n- **TextFSM and ntc-templates**: turn command output into structured data without writing your own parser.\n- **Nornir**: a framework to run tasks on many devices with an inventory file.\n- **NAPALM**: one API for many vendors.\n- **REST APIs, RESTCONF and NETCONF**: modern devices can speak JSON instead of text.\n- **Git**: keep every script and config template under version control.\n- **Labs**: Cisco DevNet sandbox, Containerlab, GNS3 or EVE-NG. Practise on lab gear before production.\n\n> tip: Pick one boring task you repeat every week and automate only that. The best first script is small and useful.\n", "ex": {"prompt": "Write the audit described above. Use `make_device`, handle `NetmikoTimeoutException`, and print the lines and the total exactly as in the example.", "starter": "import os\nfrom netmiko import ConnectHandler\nfrom netmiko.exceptions import NetmikoTimeoutException\n\ndef make_device(ip):\n    return {\n        \"device_type\": \"cisco_ios\",\n        \"host\": ip,\n        \"username\": os.environ[\"NET_USER\"],\n        \"password\": os.environ[\"NET_PASS\"],\n    }\n\ndevices = [make_device(ip) for ip in [\"10.0.0.1\", \"10.0.0.2\", \"10.0.0.3\", \"10.0.0.9\"]]\n\ntotal = 0\n# for each device: connect, count the \"down\" lines, print one line\n# finally: print(f\"TOTAL down: {total}\")\n", "tests": [["Prints one correct line per device and the total", "out.strip().splitlines() == [\"10.0.0.1: 1 down\", \"10.0.0.2: 2 down\", \"10.0.0.3: 0 down\", \"10.0.0.9: UNREACHABLE\", \"TOTAL down: 3\"]"], ["Handles errors with try/except", "\"try\" in src and \"except\" in src"]], "hint": "Inside the loop: try: with ConnectHandler(**device) as conn: output = ... except NetmikoTimeoutException: print(host + ': UNREACHABLE'); continue", "solution": "import os\nfrom netmiko import ConnectHandler\nfrom netmiko.exceptions import NetmikoTimeoutException\n\ndef make_device(ip):\n    return {\n        \"device_type\": \"cisco_ios\",\n        \"host\": ip,\n        \"username\": os.environ[\"NET_USER\"],\n        \"password\": os.environ[\"NET_PASS\"],\n    }\n\ndevices = [make_device(ip) for ip in [\"10.0.0.1\", \"10.0.0.2\", \"10.0.0.3\", \"10.0.0.9\"]]\n\ntotal = 0\nfor device in devices:\n    host = device[\"host\"]\n    try:\n        with ConnectHandler(**device) as conn:\n            output = conn.send_command(\"show ip interface brief\")\n    except NetmikoTimeoutException:\n        print(f\"{host}: UNREACHABLE\")\n        continue\n    count = 0\n    for line in output.splitlines():\n        if \"down\" in line:\n            count = count + 1\n    total = total + count\n    print(f\"{host}: {count} down\")\n\nprint(f\"TOTAL down: {total}\")\n"}}], "reference": [{"id": "cheatsheet", "part": "Reference", "title": "Cheat sheet", "minutes": 5, "body": "\nKeep this open while you write scripts. Every block is editable.\n\n## Text\n\n~~~py\ns = \"  Gi0/0  \"\nprint(s.strip(), s.lower(), s.upper())\nprint(\"Gi0/0\".startswith(\"Gi\"), \"down\" in \"link down\")\nprint(\"a,b,c\".split(\",\"), \"-\".join([\"a\", \"b\"]))\nprint(f\"{'Host':<10}|\")\n~~~\n\n## Lists and dictionaries\n\n~~~py\nitems = [1, 2, 3]\nitems.append(4)\nd = {\"host\": \"EDGE-01\"}\nprint(items[0], items[-1], len(items))\nprint(d[\"host\"], d.get(\"ip\"), list(d.keys()))\n~~~\n\n## Loops and conditions\n\n~~~py\nfor n in range(3):\n    if n == 1:\n        continue\n    print(n)\n~~~\n\n## Errors\n\n~~~py\ntry:\n    int(\"abc\")\nexcept ValueError as e:\n    print(\"Bad number:\", e)\n~~~\n\n## Files (the lab keeps them in memory)\n\n~~~py\nwith open(\"hosts.txt\", \"w\") as f:\n    f.write(\"EDGE-01\\nCORE-01\\n\")\n\nwith open(\"hosts.txt\") as f:\n    hosts = f.read().splitlines()\nprint(hosts)\n~~~\n", "ex": null}]}</script>
+<script id="py-harness" type="text/plain">import builtins
+import io
+import json
+import os
+import sys
+import traceback
+
+sys.path.insert(0, "/lab")
+os.environ["NET_USER"] = "admin"
+os.environ["NET_PASS"] = "lab123"
+
+
+def _no_input(prompt=""):
+    raise EOFError("input() is not available in the lab. Put the value in a variable instead.")
+
+
+builtins.input = _no_input
+
+HINTS = {
+    "SyntaxError": "Python could not read that line. Look for a missing colon ':', quote, or bracket on that line or the one just above it.",
+    "IndentationError": "Indentation must be consistent. Use 4 spaces for everything inside an if, for, while or def.",
+    "NameError": "Python does not know that name. Check the spelling (case matters) and that you assigned it before using it.",
+    "TypeError": "You mixed types that do not fit together, for example text + number. Convert with str() or int(), or use an f-string.",
+    "KeyError": "That key is not in the dictionary. Check the spelling, or use .get('key') which returns None instead of failing.",
+    "IndexError": "You asked for a position that does not exist. Lists start at 0 and the last index is len(list) - 1.",
+    "ZeroDivisionError": "You divided by zero. Check the value before dividing.",
+    "AttributeError": "That object has no such method. Check the spelling and what type the variable really is.",
+    "ValueError": "The value has the right type but the wrong content, for example int('abc').",
+    "ModuleNotFoundError": "That module is not in the lab. The lab has the standard library plus a pretend netmiko.",
+    "EOFError": "input() is not available in the lab. Put the value in a variable instead.",
+    "NetmikoAuthenticationException": "Login failed. Check username and password (the lab loads them into NET_USER and NET_PASS).",
+    "NetmikoTimeoutException": "The device did not answer. Check the IP address: the lab devices are 10.0.0.1, 10.0.0.2 and 10.0.0.3.",
+    "OSError": "The connection is closed. Do not use the connection after disconnect() or after the 'with' block.",
+}
+
+
+def _format_error(e, code):
+    lines = code.splitlines()
+    name = type(e).__name__
+    if isinstance(e, SyntaxError):
+        n = e.lineno or 0
+        text = (e.text or (lines[n - 1] if 0 < n <= len(lines) else "")).rstrip("\n")
+        msg = "%s on line %s: %s" % (name, n, e.msg)
+        if text:
+            msg += "\n    " + text.strip()
+    else:
+        frames = [f for f in traceback.extract_tb(e.__traceback__)
+                  if f.filename == "<your code>"]
+        parts = []
+        for f in frames:
+            src = lines[f.lineno - 1].strip() if 0 < f.lineno <= len(lines) else ""
+            parts.append("  line %d, in %s\n      %s" % (f.lineno, f.name, src))
+        msg = ""
+        if parts:
+            msg = "Traceback (most recent call last):\n" + "\n".join(parts) + "\n"
+        msg += "%s: %s" % (name, e)
+    hint = HINTS.get(name)
+    if hint is None and isinstance(e, SyntaxError):
+        hint = HINTS["SyntaxError"]
+    if hint is None:
+        for base in type(e).__mro__[1:]:
+            if base.__name__ in HINTS:
+                hint = HINTS[base.__name__]
+                break
+    return msg, hint
+
+
+def _exec(code):
+    ns = {"__name__": "__main__"}
+    buf = io.StringIO()
+    old = sys.stdout, sys.stderr
+    sys.stdout = sys.stderr = buf
+    err = hint = None
+    try:
+        exec(compile(code, "<your code>", "exec"), ns)
+    except BaseException as e:  # show every failure to the learner
+        err, hint = _format_error(e, code)
+    finally:
+        sys.stdout, sys.stderr = old
+    return ns, buf.getvalue(), err, hint
+
+
+def run_job(code, tests_json):
+    import netmiko
+    netmiko._reset()
+    tests = json.loads(tests_json)
+    ns, out, err, hint = _exec(code)
+    res = {"stdout": out, "error": err, "hint": hint, "tests": []}
+    if err is None:
+        for desc, expr in tests:
+            env = dict(ns)
+            env.update(out=out, src=code, ConnectHandler=netmiko.ConnectHandler)
+            try:
+                ok = bool(eval(expr, env))
+                res["tests"].append({"desc": desc, "ok": ok})
+            except Exception as e:
+                res["tests"].append({"desc": desc, "ok": False,
+                                     "why": "%s: %s" % (type(e).__name__, e)})
+    return json.dumps(res)
+</script>
+<script id="py-files" type="application/json">{"/lab/netmiko/__init__.py": "\"\"\"A tiny pretend Netmiko for the browser lab.\n\nIt has the same shape as the real library (ConnectHandler, send_command,\nsend_config_set, disconnect, the same exceptions) but talks to three fake\ndevices that live in memory. No network is used.\n\"\"\"\nimport copy\nimport re\n\nfrom .exceptions import (\n    NetmikoAuthenticationException,\n    NetmikoBaseException,\n    NetmikoTimeoutException,\n    ReadTimeout,\n)\n\nLAB_USER = \"admin\"\nLAB_PASS = \"lab123\"\n\n_START = {\n    \"10.0.0.1\": {\n        \"hostname\": \"EDGE-RBA-01\",\n        \"ifaces\": [\n            [\"GigabitEthernet0/0\", \"10.0.1.1\", \"up\", \"up\"],\n            [\"GigabitEthernet0/1\", \"unassigned\", \"down\", \"down\"],\n            [\"GigabitEthernet0/2\", \"10.0.2.1\", \"up\", \"up\"],\n            [\"Loopback0\", \"1.1.1.1\", \"up\", \"up\"],\n        ],\n    },\n    \"10.0.0.2\": {\n        \"hostname\": \"CORE-CAS-01\",\n        \"ifaces\": [\n            [\"GigabitEthernet0/0\", \"10.0.1.2\", \"up\", \"up\"],\n            [\"GigabitEthernet0/1\", \"unassigned\", \"down\", \"down\"],\n            [\"GigabitEthernet0/2\", \"unassigned\", \"administratively down\", \"down\"],\n        ],\n    },\n    \"10.0.0.3\": {\n        \"hostname\": \"ACC-FES-01\",\n        \"ifaces\": [\n            [\"GigabitEthernet0/0\", \"10.0.1.3\", \"up\", \"up\"],\n            [\"GigabitEthernet0/1\", \"unassigned\", \"up\", \"up\"],\n            [\"GigabitEthernet0/2\", \"unassigned\", \"up\", \"up\"],\n            [\"GigabitEthernet0/3\", \"unassigned\", \"up\", \"up\"],\n            [\"Vlan1\", \"192.168.1.3\", \"up\", \"up\"],\n        ],\n    },\n}\n\n_STATE = {}\n\n\ndef _reset():\n    \"\"\"Put the three devices back to their starting state.\"\"\"\n    _STATE.clear()\n    for ip, dev in _START.items():\n        _STATE[ip] = copy.deepcopy(dev)\n        _STATE[ip][\"desc\"] = {}\n\n\n_reset()\n\n_PREFIX = {\"gi\": \"GigabitEthernet\", \"lo\": \"Loopback\", \"vl\": \"Vlan\"}\n\n\ndef _canon(name):\n    m = re.match(r\"^([A-Za-z]+)\\s*([\\d/.]+)$\", name.strip())\n    if not m:\n        return None\n    pre = _PREFIX.get(m.group(1)[:2].lower())\n    return (pre + m.group(2)) if pre else None\n\n\nclass ConnectHandler:\n    def __init__(self, device_type=None, host=None, username=None,\n                 password=None, **kwargs):\n        if device_type is None or host is None:\n            raise TypeError(\"ConnectHandler needs at least device_type and host\")\n        if device_type not in (\"cisco_ios\", \"cisco_xe\"):\n            raise ValueError(\n                \"device_type '%s' is not available in this lab. Use 'cisco_ios'.\"\n                % device_type)\n        if host not in _STATE:\n            raise NetmikoTimeoutException(\n                \"TCP connection to device failed. Common causes: wrong IP, \"\n                \"firewall, device down. host=%s\" % host)\n        if username != LAB_USER or password != LAB_PASS:\n            raise NetmikoAuthenticationException(\n                \"Authentication to device failed. host=%s\" % host)\n        self.host = host\n        self._dev = _STATE[host]\n        self._open = True\n\n    # --- helpers -----------------------------------------------------\n    def _check(self):\n        if not self._open:\n            raise OSError(\"Socket is closed\")\n\n    def find_prompt(self):\n        self._check()\n        return self._dev[\"hostname\"] + \"#\"\n\n    def enable(self):\n        self._check()\n        return \"\"\n\n    def is_alive(self):\n        return self._open\n\n    # --- commands ----------------------------------------------------\n    def send_command(self, command, **kwargs):\n        self._check()\n        cmd = \" \".join(command.split())\n        low = cmd.lower()\n        d = self._dev\n        if low in (\"show ip interface brief\", \"show ip int brief\"):\n            rows = [\"Interface              IP-Address      OK? Method Status\"\n                    \"                Protocol\"]\n            for name, ip, st, pr in d[\"ifaces\"]:\n                rows.append(\"%-22s %-15s YES manual %-21s %s\" % (name, ip, st, pr))\n            return \"\\n\".join(rows)\n        if low == \"show version\":\n            return (\"Cisco IOS Software, Version 15.2(4)E10, RELEASE SOFTWARE\\n\"\n                    \"%s uptime is 4 weeks, 2 days, 3 hours, 11 minutes\\n\"\n                    \"System image file is \\\"flash:c2960x-universalk9-mz.bin\\\"\"\n                    % d[\"hostname\"])\n        if low == \"show running-config | include hostname\":\n            return \"hostname \" + d[\"hostname\"]\n        m = re.match(r\"^show run(?:ning-config)? interface (.+)$\", low)\n        if m:\n            name = _canon(m.group(1))\n            for row in d[\"ifaces\"]:\n                if row[0] == name:\n                    out = [\"interface \" + name]\n                    if name in d[\"desc\"]:\n                        out.append(\" description \" + d[\"desc\"][name])\n                    if row[2].startswith(\"administratively\"):\n                        out.append(\" shutdown\")\n                    out.append(\"end\")\n                    return \"\\n\".join(out)\n            return \"% Invalid input detected at '^' marker.\"\n        return \"% Invalid input detected at '^' marker.\"\n\n    def send_config_set(self, config_commands, **kwargs):\n        self._check()\n        if isinstance(config_commands, str):\n            config_commands = [config_commands]\n        d = self._dev\n        host = d[\"hostname\"]\n        out = [\"configure terminal\",\n               \"Enter configuration commands, one per line.  End with CNTL/Z.\"]\n        cur = None\n        for raw in config_commands:\n            line = raw.strip()\n            mode = \"(config-if)#\" if cur else \"(config)#\"\n            out.append(host + mode + line)\n            low = line.lower()\n            if low.startswith(\"interface \"):\n                name = _canon(line[10:])\n                if name and any(r[0] == name for r in d[\"ifaces\"]):\n                    cur = name\n                else:\n                    out.append(\"% Invalid interface\")\n                    cur = None\n            elif cur and low.startswith(\"description \"):\n                d[\"desc\"][cur] = line[12:]\n            elif cur and low in (\"shutdown\", \"no shutdown\"):\n                for r in d[\"ifaces\"]:\n                    if r[0] == cur:\n                        if low == \"shutdown\":\n                            r[2], r[3] = \"administratively down\", \"down\"\n                        else:\n                            r[2], r[3] = \"up\", \"up\"\n            elif low.startswith(\"hostname \"):\n                d[\"hostname\"] = host = line[9:].strip()\n            else:\n                out.append(\"% Invalid input detected at '^' marker.\")\n        out.append(host + \"(config)#end\")\n        out.append(host + \"#\")\n        return \"\\n\".join(out)\n\n    def save_config(self):\n        self._check()\n        return \"Building configuration...\\n[OK]\"\n\n    def disconnect(self):\n        self._open = False\n\n    def __enter__(self):\n        return self\n\n    def __exit__(self, *exc):\n        self.disconnect()\n        return False\n", "/lab/netmiko/exceptions.py": "\"\"\"Same exception names as the real Netmiko library.\"\"\"\n\n\nclass NetmikoBaseException(Exception):\n    pass\n\n\nclass NetmikoTimeoutException(NetmikoBaseException):\n    pass\n\n\nclass NetmikoAuthenticationException(NetmikoBaseException):\n    pass\n\n\nReadTimeout = NetmikoTimeoutException\n", "/lab/netlab.py": "\"\"\"Helpers that only exist in the browser lab.\"\"\"\n\n\ndef parallel_map(func, items):\n    \"\"\"Same idea as ThreadPoolExecutor().map(func, items).\n\n    Browsers cannot start real threads for Python, so the lab runs the\n    calls one after the other. The code you write stays the same shape.\n    \"\"\"\n    return [func(item) for item in items]\n"}</script>
+<script id="worker-src" type="text/plain">
+let py = null;
+self.onmessage = async (e) => {
+  const m = e.data;
+  if (m.type === 'init') {
+    try {
+      const mod = await import(m.base + 'pyodide.mjs');
+      py = await mod.loadPyodide({ indexURL: m.base });
+      for (const [path, src] of Object.entries(m.files)) {
+        const parts = path.split('/').slice(1, -1);
+        let cur = '';
+        for (const p of parts) { cur += '/' + p; try { py.FS.mkdir(cur); } catch (_) {} }
+        py.FS.writeFile(path, src);
+      }
+      py.runPython(m.harness);
+      postMessage({ type: 'ready' });
+    } catch (err) {
+      postMessage({ type: 'error', message: String(err) });
+    }
+  } else if (m.type === 'run') {
+    try {
+      const res = py.globals.get('run_job')(m.code, JSON.stringify(m.tests || []));
+      postMessage({ type: 'result', id: m.id, data: JSON.parse(res) });
+    } catch (err) {
+      postMessage({ type: 'result', id: m.id, data: { fatal: String(err) } });
+    }
+  }
+};
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script>
+(() => {
+'use strict';
+const PYODIDE_BASE = 'https://cdn.jsdelivr.net/npm/pyodide@314.0.7/';
+const RUN_LIMIT_MS = 8000;
+const DATA = JSON.parse(document.getElementById('lessons-data').textContent);
+const LESSONS = DATA.lessons, REFS = DATA.reference;
+const ALL = LESSONS.concat(REFS);
+const $ = (s, r = document) => r.querySelector(s);
+const el = (tag, cls, html) => { const n = document.createElement(tag); if (cls) n.className = cls; if (html != null) n.innerHTML = html; return n; };
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+/* ---------- progress (localStorage may be blocked: always degrade quietly) ---------- */
+const KEY = 'pynet.progress.v1';
+let store = { done: {}, drafts: {} };
+try { const raw = localStorage.getItem(KEY); if (raw) store = Object.assign(store, JSON.parse(raw)); } catch (_) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (_) {} };
+
+/* ---------- Python engine in a Web Worker so a bad loop never freezes the page ---------- */
+const engine = (() => {
+  let worker, readyRes, ready, seq = 0, state = 'loading';
+  const pending = new Map();
+  const chip = $('#engine');
+  const setChip = (s, text) => { state = s; chip.className = 'engine ' + s; $('span', chip).textContent = text; };
+  function start() {
+    setChip('loading', 'Starting Python…');
+    ready = new Promise(r => readyRes = r);
+    const blob = new Blob([document.getElementById('worker-src').textContent], { type: 'text/javascript' });
+    worker = new Worker(URL.createObjectURL(blob), { type: 'module' });
+    worker.onmessage = ev => {
+      const m = ev.data;
+      if (m.type === 'ready') { setChip('ready', 'Python ready'); readyRes(true); }
+      else if (m.type === 'error') { setChip('error', 'Python could not start'); readyRes(false); console.error(m.message); }
+      else if (m.type === 'result') {
+        const p = pending.get(m.id); if (!p) return;
+        clearTimeout(p.timer); pending.delete(m.id); p.resolve(m.data);
+      }
+    };
+    worker.onerror = () => { setChip('error', 'Python could not start'); readyRes(false); };
+    worker.postMessage({ type: 'init', base: PYODIDE_BASE, harness: document.getElementById('py-harness').textContent, files: JSON.parse(document.getElementById('py-files').textContent) });
+  }
+  function restart(reason) {
+    worker.terminate();
+    for (const [, p] of pending) { clearTimeout(p.timer); p.resolve(reason); }
+    pending.clear();
+    start();
+  }
+  async function run(code, tests) {
+    const ok = await ready;
+    if (!ok) return { fatal: 'The Python engine did not load. Check your internet connection and reload the page.' };
+    return new Promise(resolve => {
+      const id = ++seq;
+      const timer = setTimeout(() => restart({ timeout: true }), RUN_LIMIT_MS);
+      pending.set(id, { resolve, timer });
+      setChip('ready', 'Running…');
+      worker.postMessage({ type: 'run', id, code, tests });
+    }).then(r => { if (state === 'ready') setChip('ready', 'Python ready'); return r; });
+  }
+  start();
+  return { run, stop: () => restart({ stopped: true }) };
+})();
+
+/* ---------- tiny markdown ---------- */
+const inline = s => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+const editors = [];
+function makeEditor(host, code, onRun, onChange) {
+  if (window.CodeMirror) {
+    const cm = CodeMirror(host, { value: code, mode: 'python', lineNumbers: true, indentUnit: 4, viewportMargin: Infinity, lineWrapping: false,
+      extraKeys: { Tab: c => c.replaceSelection('    '), 'Ctrl-Enter': onRun, 'Cmd-Enter': onRun } });
+    cm.on('change', () => onChange && onChange());
+    const api = { get: () => cm.getValue(), set: v => cm.setValue(v), refresh: () => cm.refresh() };
+    editors.push(api); return api;
+  }
+  const ta = el('textarea', 'fallback'); ta.value = code; ta.spellcheck = false;
+  ta.setAttribute('aria-label', 'Python code');
+  ta.rows = Math.max(4, code.split('\n').length + 1);
+  ta.addEventListener('keydown', e => {
+    if (e.key === 'Tab') { e.preventDefault(); const s = ta.selectionStart; ta.setRangeText('    ', s, ta.selectionEnd, 'end'); }
+    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); onRun(); }
+  });
+  ta.addEventListener('input', () => onChange && onChange());
+  host.appendChild(ta);
+  return { get: () => ta.value, set: v => { ta.value = v; }, refresh: () => {} };
+}
+
+function showResult(out, res) {
+  out.hidden = false; out.innerHTML = '';
+  if (res.timeout) { out.innerHTML = '<div class="err"><pre>Stopped: your code ran for more than ' + RUN_LIMIT_MS / 1000 + ' seconds.</pre></div><div class="fix">Probably an endless loop. Check that the condition of every <code>while</code> loop eventually becomes False.</div>'; return; }
+  if (res.stopped) { out.innerHTML = '<span class="none">Stopped.</span>'; return; }
+  if (res.fatal) { out.innerHTML = '<div class="err"><pre></pre></div>'; $('pre', out).textContent = res.fatal; return; }
+  const lbl = el('span', 'lbl', 'Output'); out.appendChild(lbl);
+  const pre = el('pre'); pre.textContent = res.stdout || '';
+  if (res.stdout) out.appendChild(pre); else if (!res.error) out.appendChild(el('span', 'none', 'Nothing printed. Add a print() to see a value.'));
+  if (res.error) {
+    const e = el('div', 'err'); const p = el('pre'); p.textContent = res.error; e.appendChild(p); out.appendChild(e);
+    if (res.hint) { const f = el('div', 'fix'); f.textContent = 'How to fix: ' + res.hint; out.appendChild(f); }
+  }
+}
+
+async function execute(editor, tests, ui) {
+  ui.run.disabled = true; if (ui.check) ui.check.disabled = true; ui.stop.hidden = false;
+  ui.out.hidden = false; ui.out.innerHTML = '<span class="none">Running…</span>';
+  const res = await engine.run(editor.get(), tests || []);
+  ui.stop.hidden = true; ui.run.disabled = false; if (ui.check) ui.check.disabled = false;
+  showResult(ui.out, res);
+  return res;
+}
+
+function runnable(code) {
+  const box = el('div', 'runbox');
+  box.innerHTML = '<div class="runbar"><span>example.py</span><span class="spacer"></span><button class="btn stop" hidden>Stop</button><button class="btn ghost reset">Reset</button><button class="btn run">Run</button></div><div class="ed"></div><div class="out" hidden></div>';
+  const ui = { run: $('.run', box), stop: $('.stop', box), out: $('.out', box) };
+  const go = () => execute(ed, [], ui);
+  const ed = makeEditor($('.ed', box), code, go);
+  ui.run.onclick = go; ui.stop.onclick = () => engine.stop();
+  $('.reset', box).onclick = () => { ed.set(code); ui.out.hidden = true; };
+  return box;
+}
+
+function renderBody(body, root) {
+  const L = body.replace(/^\n+|\n+$/g, '').split('\n');
+  let i = 0;
+  const special = s => /^(~~~|## |- |> |\|)/.test(s);
+  while (i < L.length) {
+    const ln = L[i];
+    if (ln.startsWith('~~~')) {
+      const info = ln.slice(3).trim().split(/\s+/); const buf = []; i++;
+      while (i < L.length && !L[i].startsWith('~~~')) buf.push(L[i++]);
+      i++;
+      const code = buf.join('\n');
+      if (info[0] === 'py' && info[1] !== 'norun') root.appendChild(runnable(code + '\n'));
+      else if (info[1] === 'norun') { const b = el('div', 'codebox', '<div class="cap">Real-world code. It needs a real device, so it cannot run in the browser.</div><pre></pre>'); $('pre', b).textContent = code; root.appendChild(b); }
+      else { const b = el('div', 'codebox', '<pre></pre>'); $('pre', b).textContent = code; root.appendChild(b); }
+    } else if (ln.startsWith('## ')) { root.appendChild(el('h2', 'sec', inline(ln.slice(3)))); i++; }
+    else if (ln.startsWith('- ')) {
+      const ul = el('ul', 'bl'); while (i < L.length && L[i].startsWith('- ')) ul.appendChild(el('li', '', inline(L[i++].slice(2)))); root.appendChild(ul);
+    } else if (ln.startsWith('> ')) {
+      const m = ln.slice(2).match(/^(tip|warn):\s*(.*)$/); const warn = m && m[1] === 'warn';
+      root.appendChild(el('div', 'note' + (warn ? ' warn' : ''), '<b>' + (warn ? 'Careful.' : 'Tip.') + '</b>' + inline(m ? m[2] : ln.slice(2)))); i++;
+    } else if (ln.startsWith('|')) {
+      const rows = []; while (i < L.length && L[i].startsWith('|')) rows.push(L[i++]);
+      const cells = r => r.replace(/^\||\|$/g, '').split('|').map(c => c.trim());
+      let h = '<thead><tr>' + cells(rows[0]).map(c => '<th>' + inline(c) + '</th>').join('') + '</tr></thead><tbody>';
+      rows.slice(2).forEach(r => { h += '<tr>' + cells(r).map(c => '<td>' + inline(c) + '</td>').join('') + '</tr>'; });
+      root.appendChild(el('table', '', h + '</tbody>'));
+    } else if (!ln.trim()) i++;
+    else { const buf = []; while (i < L.length && L[i].trim() && !special(L[i])) buf.push(L[i++]); root.appendChild(el('p', '', inline(buf.join(' ')))); }
+  }
+}
+
+/* ---------- exercise panel ---------- */
+function exercise(lesson) {
+  const ex = lesson.ex, id = 'L' + lesson.id;
+  const box = el('section', 'ex' + (store.done[id] ? ' passed' : ''));
+  box.setAttribute('aria-labelledby', 'ex-h');
+  box.innerHTML = '<h2 id="ex-h">Exercise</h2><p class="prompt"></p><div class="runbox"><div class="runbar"><span>exercise.py</span></div><div class="ed"></div><div class="out" hidden></div></div><div class="actions"><button class="btn check">Check my answer</button><button class="btn alt run">Run only</button><button class="btn stop" hidden>Stop</button><button class="btn alt hint">Hint</button><button class="btn alt sol">Show solution</button><button class="btn alt reset">Reset code</button></div><div class="result" aria-live="polite"></div><div class="reveal" hidden></div>';
+  $('.prompt', box).innerHTML = inline(ex.prompt);
+  const ui = { run: $('.run', box), check: $('.check', box), stop: $('.stop', box), out: $('.out', box) };
+  const result = $('.result', box), reveal = $('.reveal', box);
+  let timer;
+  const draft = store.drafts[id];
+  const ed = makeEditor($('.ed', box), draft != null ? draft : ex.starter, () => ui.check.click(), () => {
+    clearTimeout(timer); timer = setTimeout(() => { store.drafts[id] = ed.get(); save(); }, 500);
+  });
+  ui.run.onclick = () => { result.innerHTML = ''; execute(ed, [], ui); };
+  ui.stop.onclick = () => engine.stop();
+  ui.check.onclick = async () => {
+    result.innerHTML = '';
+    const res = await execute(ed, ex.tests, ui);
+    if (!res.tests) return;
+    const ul = el('ul', 'tests');
+    res.tests.forEach(t => {
+      const li = el('li', t.ok ? 'pass' : 'fail');
+      li.innerHTML = '<span class="m" aria-hidden="true">' + (t.ok ? '✓' : '✕') + '</span><span><span class="sr">' + (t.ok ? 'Passed: ' : 'Failed: ') + '</span>' + esc(t.desc) + (t.why ? '<span class="why">' + esc(t.why) + '</span>' : '') + '</span>';
+      ul.appendChild(li);
+    });
+    result.appendChild(ul);
+    const all = res.tests.every(t => t.ok);
+    const b = el('div', 'banner' + (all ? '' : ' try'));
+    if (all) {
+      store.done[id] = true; save(); box.classList.add('passed'); refreshChrome();
+      const next = ALL_LESSON_NEXT(lesson);
+      b.innerHTML = '<strong>All checks passed.</strong> Lesson ' + lesson.id + ' is done.';
+      if (next) { const a = el('a', 'btn good', 'Next: ' + esc(next.title)); a.href = next.href; a.style.textDecoration = 'none'; b.appendChild(a); }
+    } else b.innerHTML = '<strong>Not yet.</strong> Read the failed checks, change one thing, and try again. The Hint button can help.';
+    result.appendChild(b);
+  };
+  $('.hint', box).onclick = () => { reveal.hidden = false; reveal.innerHTML = '<strong>Hint.</strong> '; const c = el('code'); c.textContent = ex.hint; reveal.appendChild(c); };
+  $('.sol', box).onclick = () => {
+    reveal.hidden = false; reveal.innerHTML = '<strong>Solution.</strong> Try to understand each line, then type it yourself.';
+    const b = el('div', 'codebox', '<pre></pre>'); $('pre', b).textContent = ex.solution; b.style.marginTop = '8px'; reveal.appendChild(b);
+  };
+  $('.reset', box).onclick = () => { ed.set(ex.starter); delete store.drafts[id]; save(); ui.out.hidden = true; result.innerHTML = ''; };
+  return box;
+}
+
+/* ---------- navigation chrome ---------- */
+const hrefOf = l => typeof l.id === 'number' ? '#/lesson/' + l.id : '#/' + l.id;
+function ALL_LESSON_NEXT(l) {
+  const i = LESSONS.indexOf(l); const n = LESSONS[i + 1];
+  return n ? { title: n.title, href: hrefOf(n) } : null;
+}
+let current = null;
+function refreshChrome() {
+  const ports = $('#ports'); ports.innerHTML = '';
+  const groups = {}; LESSONS.forEach(l => (groups[l.part] = groups[l.part] || []).push(l));
+  Object.keys(groups).forEach(p => {
+    const g = el('div', 'pgroup'); g.setAttribute('role', 'group'); g.setAttribute('aria-label', p);
+    groups[p].forEach(l => {
+      const a = el('a', 'port' + (store.done['L' + l.id] ? ' done' : '') + (current === l ? ' cur' : ''), String(l.id));
+      a.href = hrefOf(l);
+      a.title = 'Lesson ' + l.id + ': ' + l.title;
+      a.setAttribute('aria-label', 'Lesson ' + l.id + ', ' + l.title + (store.done['L' + l.id] ? ', done' : ''));
+      g.appendChild(a);
+    });
+    ports.appendChild(g);
+  });
+  const done = LESSONS.filter(l => store.done['L' + l.id]).length;
+  $('#count').textContent = done + ' of ' + LESSONS.length + ' lessons done';
+  const side = $('#side'); side.innerHTML = '';
+  Object.keys(groups).forEach(p => {
+    side.appendChild(el('h2', '', esc(p)));
+    groups[p].forEach(l => {
+      const a = el('a', '', '<span class="n">' + l.id + '</span><span>' + esc(l.title) + '</span>' + (store.done['L' + l.id] ? '<span class="st" aria-label="done">✓</span>' : ''));
+      a.href = hrefOf(l); if (current === l) a.setAttribute('aria-current', 'page'); side.appendChild(a);
+    });
+  });
+  side.appendChild(el('h2', '', 'Tools'));
+  [['Playground', '#/playground', current === 'play'], ['Cheat sheet', '#/cheatsheet', current === REFS[0]]].forEach(([t, h, c]) => {
+    const a = el('a', '', '<span>' + t + '</span>'); a.href = h; if (c) a.setAttribute('aria-current', 'page'); side.appendChild(a);
+  });
+  const rb = el('button', 'link', 'Reset my progress');
+  rb.onclick = () => { if (confirm('Erase all progress and saved code on this device?')) { store = { done: {}, drafts: {} }; save(); route(); } };
+  side.appendChild(rb);
+}
+
+/* ---------- pages ---------- */
+function home() {
+  const done = LESSONS.filter(l => store.done['L' + l.id]).length;
+  const next = LESSONS.find(l => !store.done['L' + l.id]) || LESSONS[0];
+  const d = el('div', 'page');
+  d.innerHTML = '<div class="hero"><h1>Learn Python on real network problems</h1><p class="lead">Write code, press Run, see the output. Every example uses hostnames, VLANs and <code>show</code> output, and the last lessons connect to three pretend switches and routers. Nothing to install.</p></div>';
+  const cta = el('div', 'cta');
+  cta.innerHTML = '<a class="p" href="' + hrefOf(next) + '">' + (done ? 'Continue with lesson ' + next.id : 'Start lesson 1') + '</a><a class="s" href="#/playground">Open the playground</a>';
+  d.appendChild(cta);
+  const parts = [['Part 1: Fundamentals', 'print, variables, conditions, loops, lists, dictionaries and debugging.'],
+    ['Part 2: Functions', 'Small reusable functions for validating and formatting network data.'],
+    ['Part 3: Networking', 'Inventories, parsing show output, Netmiko, many devices, safe config pushes.'],
+    ['Final part', 'Credentials, script habits, and a capstone interface audit.']];
+  const g = el('div', 'parts'); parts.forEach(([t, p]) => g.appendChild(el('div', 'part', '<h3>' + t + '</h3><p>' + p + '</p>')));
+  d.appendChild(g);
+  d.appendChild(el('h2', 'sec', 'How it works'));
+  const ul = el('ul', 'bl');
+  ['Each lesson has examples you can edit and run, then an exercise that is checked automatically.',
+   'Python runs inside your browser. Your code never leaves your computer.',
+   'Progress and your code are saved in this browser only.',
+   'The Netmiko lab is simulated: devices 10.0.0.1 to 10.0.0.3 answer, 10.0.0.9 does not. The login is read from <code>NET_USER</code> and <code>NET_PASS</code>.'].forEach(t => ul.appendChild(el('li', '', t)));
+  d.appendChild(ul);
+  return d;
+}
+
+function lessonPage(l) {
+  const d = el('div', 'page');
+  d.appendChild(el('h1', '', esc(l.title)));
+  d.appendChild(el('p', 'meta', esc(l.part) + (l.minutes ? ' · about ' + l.minutes + ' minutes' : '')));
+  renderBody(l.body, d);
+  if (l.ex) d.appendChild(exercise(l));
+  const i = LESSONS.indexOf(l);
+  if (i >= 0) {
+    const pg = el('div', 'pager'); const p = LESSONS[i - 1], n = LESSONS[i + 1];
+    pg.innerHTML = (p ? '<a href="' + hrefOf(p) + '"><small>Previous</small>' + esc(p.title) + '</a>' : '<span></span>') + (n ? '<a href="' + hrefOf(n) + '"><small>Next</small>' + esc(n.title) + '</a>' : '');
+    d.appendChild(pg);
+  }
+  return d;
+}
+
+function playground() {
+  const d = el('div', 'page');
+  d.innerHTML = '<h1>Playground</h1><p class="meta">Your own scratch space. Everything from the lessons is available, including the lab devices.</p>';
+  const start = '# Try anything here. Ctrl+Enter runs the code.\nimport os\nfrom netmiko import ConnectHandler\n\ndevice = {\n    "device_type": "cisco_ios",\n    "host": "10.0.0.2",\n    "username": os.environ["NET_USER"],\n    "password": os.environ["NET_PASS"],\n}\n\nwith ConnectHandler(**device) as conn:\n    print(conn.send_command("show version"))\n';
+  const box = el('div', 'runbox');
+  box.innerHTML = '<div class="runbar"><span>scratch.py</span><span class="spacer"></span><button class="btn stop" hidden>Stop</button><button class="btn ghost reset">Reset</button><button class="btn run">Run</button></div><div class="ed"></div><div class="out" hidden></div>';
+  const ui = { run: $('.run', box), stop: $('.stop', box), out: $('.out', box) };
+  let timer;
+  const go = () => execute(ed, [], ui);
+  const ed = makeEditor($('.ed', box), store.drafts.play != null ? store.drafts.play : start, go, () => { clearTimeout(timer); timer = setTimeout(() => { store.drafts.play = ed.get(); save(); }, 500); });
+  ui.run.onclick = go; ui.stop.onclick = () => engine.stop();
+  $('.reset', box).onclick = () => { ed.set(start); delete store.drafts.play; save(); ui.out.hidden = true; };
+  d.appendChild(box);
+  d.appendChild(el('p', '', 'Lab devices: <code>10.0.0.1</code> EDGE-RBA-01, <code>10.0.0.2</code> CORE-CAS-01, <code>10.0.0.3</code> ACC-FES-01. Try <code>show ip interface brief</code>, <code>show version</code>, or <code>send_config_set([...])</code>.'));
+  return d;
+}
+
+function route() {
+  const h = location.hash || '#/';
+  const main = $('#main'); main.innerHTML = ''; editors.length = 0;
+  let page, title = 'Python for network engineers';
+  const m = h.match(/^#\/lesson\/(\d+)$/);
+  if (m && LESSONS.find(l => l.id === +m[1])) { current = LESSONS.find(l => l.id === +m[1]); page = lessonPage(current); title = current.title; }
+  else if (h === '#/playground') { current = 'play'; page = playground(); title = 'Playground'; }
+  else if (h === '#/cheatsheet') { current = REFS[0]; page = lessonPage(REFS[0]); title = 'Cheat sheet'; }
+  else { current = null; page = home(); }
+  main.appendChild(page);
+  editors.forEach(e => e.refresh());
+  document.title = (current ? title + ' · ' : '') + 'Python for network engineers';
+  document.body.classList.remove('menu-open'); $('#menu').setAttribute('aria-expanded', 'false');
+  refreshChrome();
+  window.scrollTo(0, 0);
+  const h1 = $('h1', main); if (h1) { h1.tabIndex = -1; h1.focus({ preventScroll: true }); }
+}
+
+$('#menu').onclick = () => { const o = document.body.classList.toggle('menu-open'); $('#menu').setAttribute('aria-expanded', String(o)); };
+const topH = () => document.documentElement.style.setProperty('--topH', $('.top').offsetHeight + 'px');
+window.addEventListener('resize', topH); topH();
+window.addEventListener('hashchange', route);
+route();
+})();
+</script>
+</body>
+</html>
