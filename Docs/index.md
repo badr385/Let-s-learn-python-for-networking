@@ -1,4 +1,5 @@
 ## 👋 Welcome
+**New:** [Open the interactive lab](app/index.html) - write Python and run it in your browser.
 
 This website is a **practical introduction to Python**.
 
